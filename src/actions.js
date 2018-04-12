@@ -1,4 +1,4 @@
-let APIkey = "2767d0a1c62b3994f53e607c7887500f"
+let APIkey = ""
 export let changeMaxInvestment = (event) => {
   return {
     type:"CHANGE_MAX_INVESTMENT",
