@@ -25,6 +25,7 @@ class Inputs extends Component {
 
   const mapStateToProps = (state) => {
     return {
+      allCurrencies:state.allCurrencies,
       maxInvestment:state.maxInvestment,
       baseCurrency:state.baseCurrency
     }

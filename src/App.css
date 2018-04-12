@@ -26,3 +26,18 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+/* .container{
+  border-width: medium;
+  border-color: black;
+  background-color: pink
+}
+
+.row{
+  background-color: green;
+} */
+
+.currency-table{
+  border: 1px solid black;
+  padding: 15px;
+}

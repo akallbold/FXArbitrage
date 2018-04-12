@@ -1,58 +1,55 @@
 import React, { Component } from 'react';
+// import ReactTable from 'react-table'
+import {connect} from "react-redux"
 
 
 class CurrencyRates extends Component {
 
-
-//   constructor(props){
-//     super(props);
-//     this.state = {size: 3}
-//   }
-//   render(){
-//     let rows = [];
-//     for (var i = 0; i < this.state.size; i++){
-//       let rowID = `row${i}`
-//       let cell = []
-//       for (var idx = 0; idx < this.state.size; idx++){
-//         let cellID = `cell${i}-${idx}`
-//         cell.push(<td key={cellID} id={cellID}></td>)
-//       }
-//       rows.push(<tr key={i} id={rowID}>{cell}</tr>)
-//     }
-//     return(
-//       <div className="container">
-//         <div className="row">
-//           <div className="col s12 board">
-//             <table id="simple-board">
-//                <tbody>
-//                  {rows}
-//                </tbody>
-//              </table>
-//           </div>
-//         </div>
-//       </div>
-//     )
-//   }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
   render() {
+    // debugger
+    // {this.props.rates["USD"]["USD"]}
+    console.log("rates", this.props.rates)
     return (
-      <div className="currency-rates">
-        <p>currency rates</p>
-      </div>
-    );
+      <table className="currency-table">
+        <caption>Real Time Exchange Rates </caption>
+        <tr>
+          <th></th>
+          <th>USD</th>
+          <th>AUD</th>
+          <th>EUR</th>
+          <th>JPY</th>
+          <th>GBP</th>
+        </tr>
+        <tr>
+          <th>USD</th>
+          <td>data</td><td>data</td><td>data</td><td>data</td><td>data</td>
+        </tr>
+        <tr>
+          <th>AUD</th>
+          <td>data</td><td>data</td><td>data</td><td>data</td><td>data</td>
+        </tr>
+        <tr>
+          <th>EUR</th>
+          <td>data</td><td>data</td><td>data</td><td>data</td><td>data</td>
+        </tr>
+        <tr>
+          <th>JPY</th>
+          <td>data</td><td>data</td><td>data</td><td>data</td><td>data</td>
+        </tr>
+        <tr>
+          <th>GBP</th>
+          <td>data</td><td>data</td><td>data</td><td>data</td><td>data</td>
+        </tr>
+      </table>
+    )
   }
 }
 
-export default CurrencyRates;
+
+const mapStateToProps = (state) => {
+  return {
+    rates: state.rates
+  }
+}
+
+export default connect(mapStateToProps)(CurrencyRates);

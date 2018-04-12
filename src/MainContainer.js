@@ -7,24 +7,30 @@ import {fetchRates} from "./actions"
 
 class MainContainer extends Component {
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     console.log("rates array in maincontainer", this.props.rates)
     this.props.fetchRates(this.props.allCurrencies, this.props.rates)
+    // debugger
+    this.tradeMagic()
   }
 
-  // tradeMagic = () => {
-  //   if (this.props.numberOfTrades === 0) {
-  //     //trade from base
-  //     this.props.numberOfTrades++
-  //     this.props.currentMoney = this.props.maxInvestment
-  //     this.props.currentMoney *= futureCurrencyRate()
-  //     this.props.currentCurrency =
-  //   }else if (this.props.numberOfTrades === 2) {
-  //     //trade into base
-  //   } else {
-  //     //middle trade from or into don't matter
-  //   }
-  // }
+
+
+  tradeMagic = () => {
+    console.log("rates in main", this.props.rates)
+    // debugger
+    // if (this.props.numberOfTrades === 0) {
+    //   //trade from base
+    //   this.props.numberOfTrades++
+    //   this.props.currentMoney = this.props.maxInvestment
+    //   this.props.currentMoney *= this.props.rates[currentCurrency][futureCurrency]
+    //   this.props.currentCurrency =
+    // }else if (this.props.numberOfTrades === 2) {
+    //   //trade into base
+    // } else {
+    //   //middle trade from or into don't matter
+    // }
+  }
 
 //     function firstNode(baseCurrency, outCurrency) {
 //       getRates(baseCurrency).then(exchangeRates => {
