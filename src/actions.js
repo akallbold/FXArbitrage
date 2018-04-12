@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 let APIkey = "2767d0a1c62b3994f53e607c7887500f"
 
+=======
+let APIkey = ""
+>>>>>>> f52d91ad153d25213a1e6a910026c0572124a887
 export let changeMaxInvestment = (event) => {
   return {
     type:"CHANGE_MAX_INVESTMENT",
