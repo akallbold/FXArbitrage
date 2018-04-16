@@ -28,7 +28,7 @@ class MainContainer extends Component {
   render() {
     console.log("Trade permies", this.props.tradePermutations)
     return (
-      <div className="App">
+      <div className="main-container">
         <CurrencyRates/>
         <Inputs handleRun={this.handleRun}/>
         <TradeTable/>

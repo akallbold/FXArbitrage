@@ -6,7 +6,7 @@ class Inputs extends Component {
 
   render() {
     return (
-      <div className="trade-table">
+      <div className="input-form">
         <form >
           <label>What is your maximum investment?</label>
           <br></br>

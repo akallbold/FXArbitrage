@@ -2,3 +2,19 @@
   border: 1px solid black;
   padding: 15px;
 }
+
+
+.main-container{
+  display: flex;
+  justify-content: space-between;
+}
+
+.currency-table{
+  border: 1px solid black;
+}
+
+.input-form{}
+
+.trade-table{
+  border: 1px solid black;
+}
