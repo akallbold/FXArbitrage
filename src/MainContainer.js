@@ -26,7 +26,6 @@ class MainContainer extends Component {
 
 
   render() {
-    console.log("Trade permies", this.props.tradePermutations)
     return (
       <div className="main-container">
         <CurrencyRates/>

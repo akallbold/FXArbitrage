@@ -4,7 +4,7 @@ const defaultState = {
   currentCurrency: "USD",
   currentExchange:1,
   currentMoney: 0,
-  maxInvestment: 100,
+  maxInvestment: 100000000,
   nonBaseCurrencies:["EUR", "GBP", "JPY", "AUD"],
   numberOfTrades:0,
   tradePermutations:[],

@@ -35,7 +35,7 @@ class TradeTable extends Component {
         currentMoney *= this.props[this.props.baseCurrency][currencyPair[0]]
         // this.props.exchange([this.props.baseCurrency,currencyPair[0]])
         currentCurrency = currencyPair[0]
-        debugger
+        // debugger
         // this.props.updateCurrency(currencyPair[1])
         tradeNumber++
       } else if (tradeNumber === 1) {

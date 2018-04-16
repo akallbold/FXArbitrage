@@ -1,3 +1,7 @@
+.body{
+  font-family: 'Lato', sans-serif;
+}
+
 .currency-table{
   border: 1px solid black;
   padding: 15px;
@@ -7,14 +11,20 @@
 .main-container{
   display: flex;
   justify-content: space-between;
+  font-family: 'Lato', sans-serif;
+  color: rgb(56,56,56);
 }
 
 .currency-table{
   border: 1px solid black;
+  margin: 10px 0px 0px 10px;
 }
 
-.input-form{}
+.input-form{
+  margin: 30px 0px 0px 0px;
+}
 
 .trade-table{
   border: 1px solid black;
+  margin: 10px 10px 0px 0px;
 }

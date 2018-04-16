@@ -10,7 +10,7 @@ class CurrencyRates extends Component {
         <caption>Real Time Exchange Rates </caption>
         <tbody>
           <tr align="center">
-            <th></th>
+            <th>base &#8595;</th>
             <th>USD</th>
             <th>AUD</th>
             <th>EUR</th>
