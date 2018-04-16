@@ -1,45 +1,53 @@
 import React, { Component } from 'react';
-// import ReactTable from 'react-table'
 import {connect} from "react-redux"
 
 
 class CurrencyRates extends Component {
 
   render() {
-    // debugger
-    // {this.props.rates["USD"]["USD"]}
-    console.log("rates", this.props.rates)
     return (
       <table className="currency-table">
         <caption>Real Time Exchange Rates </caption>
-        <tr>
-          <th></th>
-          <th>USD</th>
-          <th>AUD</th>
-          <th>EUR</th>
-          <th>JPY</th>
-          <th>GBP</th>
-        </tr>
-        <tr>
-          <th>USD</th>
-          <td>data</td><td>data</td><td>data</td><td>data</td><td>data</td>
-        </tr>
-        <tr>
-          <th>AUD</th>
-          <td>data</td><td>data</td><td>data</td><td>data</td><td>data</td>
-        </tr>
-        <tr>
-          <th>EUR</th>
-          <td>data</td><td>data</td><td>data</td><td>data</td><td>data</td>
-        </tr>
-        <tr>
-          <th>JPY</th>
-          <td>data</td><td>data</td><td>data</td><td>data</td><td>data</td>
-        </tr>
-        <tr>
-          <th>GBP</th>
-          <td>data</td><td>data</td><td>data</td><td>data</td><td>data</td>
-        </tr>
+        <tbody>
+          <tr>
+            <th></th>
+            <th>USD</th>
+            <th>AUD</th>
+            <th>EUR</th>
+            <th>JPY</th>
+            <th>GBP</th>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <th>USD</th>
+            <td>{this.props.USD.USD}</td><td>{this.props.USD.AUD}</td><td>{this.props.USD.EUR}</td><td>{this.props.USD.JPY}</td><td>{this.props.USD.GBP}</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <th>AUD</th>
+            <td>{this.props.AUD.USD}</td><td>{this.props.AUD.AUD}</td><td>{this.props.AUD.EUR}</td><td>{this.props.AUD.JPY}</td><td>{this.props.AUD.GBP}</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <th>EUR</th>
+            <td>{this.props.EUR.USD}</td><td>{this.props.EUR.AUD}</td><td>{this.props.EUR.EUR}</td><td>{this.props.EUR.JPY}</td><td>{this.props.EUR.GBP}</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <th>JPY</th>
+            <td>{this.props.JPY.USD}</td><td>{this.props.JPY.AUD}</td><td>{this.props.JPY.EUR}</td><td>{this.props.JPY.JPY}</td><td>{this.props.JPY.GBP}</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <th>GBP</th>
+            <td>{this.props.GBP.USD}</td><td>{this.props.GBP.AUD}</td><td>{this.props.GBP.EUR}</td><td>{this.props.GBP.JPY}</td><td>{this.props.GBP.GBP}</td>
+          </tr>
+        </tbody>
       </table>
     )
   }
@@ -48,7 +56,11 @@ class CurrencyRates extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    rates: state.rates
+    USD: state.USD,
+    EUR: state.EUR,
+    GBP: state.GBP,
+    JPY: state.JPY,
+    AUD: state.AUD
   }
 }
 
