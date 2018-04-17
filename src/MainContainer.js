@@ -4,6 +4,7 @@ import Inputs from './Inputs'
 import TradeTable from './TradeTable'
 import {connect} from "react-redux"
 import {fetchRates, createTradePermutations, changeCurrentMoney, exchange, updateCurrency, increaseTradeCount} from "./actions"
+let mykey = config.API_KEY;
 
 class MainContainer extends Component {
 
