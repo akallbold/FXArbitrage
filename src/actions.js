@@ -1,6 +1,7 @@
 let APIkey = "2767d0a1c62b3994f53e607c7887500f"
 
 export let changeMaxInvestment = (event) => {
+  // console.log("working")
   return {
     type:"CHANGE_MAX_INVESTMENT",
     payload:event.target.value
@@ -54,6 +55,13 @@ export let startTrades = () => {
 export let createTradePermutations = () => {
   return {
     type:"CREATE_TRADE_PERMUTATIONS"
+  }
+}
+
+export let toggleTrade = () => {
+  console.log("in toggle trade on actions")
+  return {
+    type:"TOGGLE_TRADE"
   }
 }
 

@@ -7,6 +7,7 @@ const defaultState = {
   maxInvestment: 100000000,
   nonBaseCurrencies:["EUR", "GBP", "JPY", "AUD"],
   numberOfTrades:0,
+  tradeOn: false,
   tradePermutations:[],
   USD:{},
   EUR:{},
@@ -50,6 +51,11 @@ const fxReducer = (state = defaultState, action) => {
       return {...state,[action.payload.base]:action.payload.rates}
     case "INCREASE_TRADE_COUNT":
       return {...state, numberOfTrades:state.numberOfTrades++}
+    case "TOGGLE_TRADE":
+    debugger
+      console.log("in toggletrade on reducer")
+
+      return {...state, tradeOn:!state.tradeOn}
     case "UPDATE_CURRENCY":
       return {...state, currentCurrency:action.payload}
     default:

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux"
-import {changeMaxInvestment, changeBaseCurrency} from "./actions"
+import {changeMaxInvestment, changeBaseCurrency, tradeMagic, toggleTrade} from "./actions"
 
 class Inputs extends Component {
 
   render() {
+    // debugger
     return (
       <div className="input-form">
         <form >
@@ -12,12 +13,16 @@ class Inputs extends Component {
           <br></br>
           <input type= "text" value= {this.props.maxInvestment} onChange={this.props.changeMaxInvestment}></input>
           <br></br>
-          <label>What is your base currency?</label>
+          {/* <label>What is your base currency?</label>
           <br></br>
           <input type="radio" value="USD" name="USD" checked="true" onChange={this.props.changeBaseCurrency} />
           <input type="radio" value="EUR" name="EUR" onChange={this.props.changeBaseCurrency} />
-          <br></br>
-          <input onClick={this.props.handleRun} type="submit" value="Start Trading"></input>
+          <br></br> */}
+          <button
+            onClick= {() => this.props.toggleTrade()}
+          >
+            {this.props.tradeOn ? "Stop Trading" :  "Start Trading"}
+          </button>
         </form>
       </div>
     );
@@ -28,8 +33,9 @@ class Inputs extends Component {
     return {
       allCurrencies:state.allCurrencies,
       maxInvestment:state.maxInvestment,
-      baseCurrency:state.baseCurrency
+      baseCurrency:state.baseCurrency,
+      tradeOn: state.tradeOn
     }
   }
 
-export default connect(mapStateToProps, {changeMaxInvestment, changeBaseCurrency})(Inputs);
+export default connect(mapStateToProps, {changeMaxInvestment, changeBaseCurrency, toggleTrade})(Inputs);
