@@ -114,7 +114,7 @@ class MainContainer extends Component {
     } else {
       console.log("Something went wrong")
     }
-    debugger
+    // debugger
   }
 
 
@@ -122,6 +122,7 @@ class MainContainer extends Component {
 
 
   render() {
+    console.log("trade",this.state.trade)
     return (
       <div className="main-container">
         <CurrencyRates USD= {this.state.USD}

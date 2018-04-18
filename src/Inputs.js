@@ -9,7 +9,8 @@ class Inputs extends Component {
     this.props.updateMaxInvestment(event.target.value)
   }
 
-  handleClick = () => {
+  handleClick = (event) => {
+    event.preventDefault()
     this.props.updateTrade()
     this.props.startTrades()
   }
