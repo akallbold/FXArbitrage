@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {connect} from "react-redux"
+// import {connect} from "react-redux"
 
 
 class CurrencyRates extends Component {
@@ -52,16 +52,16 @@ class CurrencyRates extends Component {
     )
   }
 }
+//
+//
+// const mapStateToProps = (state) => {
+//   return {
+//     USD: state.USD,
+//     EUR: state.EUR,
+//     GBP: state.GBP,
+//     JPY: state.JPY,
+//     AUD: state.AUD
+//   }
+// }
 
-
-const mapStateToProps = (state) => {
-  return {
-    USD: state.USD,
-    EUR: state.EUR,
-    GBP: state.GBP,
-    JPY: state.JPY,
-    AUD: state.AUD
-  }
-}
-
-export default connect(mapStateToProps)(CurrencyRates);
+export default (CurrencyRates);

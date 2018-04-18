@@ -2,79 +2,119 @@ import React, { Component } from 'react';
 import CurrencyRates from './CurrencyRates'
 import Inputs from './Inputs'
 import TradeTable from './TradeTable'
-import {connect} from "react-redux"
-import {fetchRates, createTradePermutations, changeCurrentMoney, exchange, updateCurrency, increaseTradeCount} from "./actions"
-let mykey = config.API_KEY;
+// import { get } from 'lodash'
+// import {connect} from "react-redux"
+// import {fetchRates, createTradePermutations, changeCurrentMoney, exchange, updateCurrency, increaseTradeCount} from "./actions"
+// import config from './config.js'
+// let mykey = config.API_KEY;
 
 class MainContainer extends Component {
 
-  componentDidMount = () => {
-    console.log("componentdidmount")
-    this.props.fetchRates(this.props.allCurrencies, this.props.rates);
-    this.props.createTradePermutations();
-    console.log("tradeon maincontainerdidmount",this.props.tradeOn)
-    // debugger
-
+  state= {
+    allCurrencies:["USD", "EUR", "GBP", "JPY", "AUD"],
+    baseCurrency: "USD",
+    currentCurrency: "USD",
+    currentExchange:1,
+    currentMoney: 0,
+    maxInvestment: 100000000,
+    nonBaseCurrencies:["EUR", "GBP", "JPY", "AUD"],
+    numberOfTrades:0,
+    successfulTrades:[],
+    timeOfLastFetch: "",
+    trade: false,
+    tradePermutations:[],
+    USD:{},
+    EUR:{},
+    GBP:{},
+    JPY:{},
+    AUD:{}
   }
 
+  componentDidMount = () => {
+    this.getRates(this.state.allCurrencies);
+    this.createTradePermutations();
+  }
 
-  // if (this.props.tradeOn){
-  //   console.log("trade on!")
-  //   this.handleRun()
-  // }
+  getRates = (currencyArray) => {
+    currencyArray.forEach(currency => {
+      this.fetchRates(currency)
+    })
+  }
 
-  // componentWillReceiveProps = () => {
-  //   this.handleRun()
-  // }
-    // this.handleRun()
+  fetchRates = (currency) => {
+    fetch(`http://data.fixer.io/api/latest?access_key=163d5e4c148ba5fa464c57d6873e9e95&base=${currency}&symbols=USD,AUD,EUR,JPY,GBP`)
+    .then(response => response.json())
+    .then(data => {
+      this.setState({[data.base]: data.rates, timeOfLastFetch: new Date()})
+      // this.setState({timeOfLastFetch: Time.now})
+    })
+  }
 
+  createTradePermutations = () => {
+    let tradeArray = []
+    for (let i=0;i<this.state.nonBaseCurrencies.length;i++){
+      let currentArray = []
+      for (let j=0;j<this.state.nonBaseCurrencies.length;j++){
+        currentArray.push(this.state.nonBaseCurrencies[i])
+        if (!currentArray.includes(this.state.nonBaseCurrencies[j])){
+          currentArray.push(this.state.nonBaseCurrencies[j])
+          let uniqueItems = Array.from(new Set(currentArray))
+          tradeArray.push(uniqueItems)
+          currentArray=[]
+        }
+      }
+    }
+    this.setState({tradePermutations: tradeArray})
+  }
 
-  handleRun = () => {
-    if (this.props.tradeOn){
-      console.log("clicked")
-      let trades= [["EUR", "GBP"]]
-      trades.forEach(currencyPair => {
+  updateMaxInvestment = (input) => {
+    this.setState({maxInvestment:input})
+  }
+
+  updateTrade = () => {
+    this.setState({trade:!this.state.trade})
+  }
+
+  startTrades = () => {
+    // if (this.state.trade){
+      this.state.tradePermutations.forEach(currencyPair => {
         this.tradeMagic(currencyPair)
       })
-    }
-
+    // }
   }
 
   tradeMagic = (currencyPair) => {
-    let baseCurrency = this.props.baseCurrency
-    let currentCurrency = this.props.currentCurrency
-    let currentMoney = this.props.maxInvestment
-    let tradeNumber = this.props.numberOfTrades
+    let baseCurrency = this.state.baseCurrency
+    let currentCurrency = this.state.currentCurrency
+    let currentMoney = this.state.maxInvestment
+    let tradeNumber = this.state.numberOfTrades
     for (let i=0;i<3;i++){
       if (tradeNumber === 0) {
-        currentMoney *= this.props[this.props.baseCurrency][currencyPair[0]]
-        // this.props.exchange([this.props.baseCurrency,currencyPair[0]])
+        currentMoney *= this.state[baseCurrency][currencyPair[0]]
         currentCurrency = currencyPair[0]
-        // debugger
-        // this.props.updateCurrency(currencyPair[1])
-        tradeNumber++
       } else if (tradeNumber === 1) {
-          this.props.exchange([this.props.currentCurrency,currencyPair[0]])
-          this.props.updateCurrency(currencyPair[1])
-                  tradeNumber++
+        // debugger
+        currentMoney *= this.state[currentCurrency][currencyPair[1]]
+        currentCurrency = currencyPair[1]
       } else if(tradeNumber === 2){
-          this.props.exchange([this.props.currentCurrency,this.props.baseCurrency])
-          this.props.updateCurrency(this.props.baseCurrency)
-                  tradeNumber++
+        currentMoney *= this.state[currentCurrency][baseCurrency]
       } else {
           console.log("error in trademagic")
       }
-      // this.props.increaseTradeCount()
+      tradeNumber++
     }
-    if (this.props.currentMoney > this.props.maxInvestment){
-      //save this in a state object to add to a table
-      console.log(`YOU EARNED $${this.props.currentMoney - this.props.maxInvestment}`)
-    } else if (this.props.currentMoney === this.props.maxInvestment){
+
+    if (currentMoney > this.state.maxInvestment){
+      console.log(`YOU EARNED $${currentMoney - this.state.maxInvestment}`)
+      let newArray = this.state.successfulTrades.push({time:this.state.timeOfLastFetch, currencyPair:currencyPair, profits:currentMoney - this.state.maxInvestment})
+      this.setState({successfulTrades:newArray}, console.log(this.state.successfulTrades))
+      this.setState({maxInvestment:currentMoney})
+    } else if (currentMoney === this.state.maxInvestment){
       console.log("You did not earn any money off this trade", currencyPair)
     } else {
-      // debugger
       console.log("Something went wrong")
     }
+    debugger
   }
 
 
@@ -82,35 +122,23 @@ class MainContainer extends Component {
 
 
   render() {
-    // console.log("trade perms", this.props.tradePermutations)
-    // console.log("trade rates", this.props.AUD)
     return (
       <div className="main-container">
-        <CurrencyRates/>
-        <Inputs tradeMagic = {this.tradeMagic}/>
-        <TradeTable/>
+        <CurrencyRates USD= {this.state.USD}
+                       EUR= {this.state.EUR}
+                       GBP= {this.state.GBP}
+                       AUD= {this.state.AUD}
+                       JPY= {this.state.JPY}
+        />
+        <Inputs startTrades = {this.startTrades}
+                maxInvestment = {this.state.maxInvestment}
+                updateMaxInvestment = {this.updateMaxInvestment}
+                trade = {this.state.trade}
+                updateTrade = {this.updateTrade}/>
+        <TradeTable successfulTrades= {this.state.successfulTrades}/>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    allCurrencies: state.allCurrencies,
-    baseCurrency: state.baseCurrency,
-    currentCurrency: state.currentCurrency,
-    currentExchange: state.currentExchange,
-    currentMoney: state.currentMoney,
-    maxInvestment: state.maxInvestment,
-    numberOfTrades: state.numberOfTrades,
-    tradeOn: state.tradeOn,
-    tradePermutations: state.tradePermutations,
-    USD: state.USD,
-    EUR: state.EUR,
-    GBP: state.GBP,
-    JPY: state.JPY,
-    AUD: state.AUD
-  }
-}
-
-export default connect(mapStateToProps, {fetchRates, createTradePermutations, changeCurrentMoney, exchange, updateCurrency, increaseTradeCount}) (MainContainer);
+export default (MainContainer);

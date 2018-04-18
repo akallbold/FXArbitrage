@@ -1,17 +1,28 @@
 import React, { Component } from 'react';
-import {connect} from "react-redux"
-import {changeMaxInvestment, changeBaseCurrency, tradeMagic, toggleTrade} from "./actions"
+// import {connect} from "react-redux"
+// import {changeMaxInvestment, changeBaseCurrency, tradeMagic, toggleTrade} from "./actions"
 
 class Inputs extends Component {
 
+
+  handleChange = (event) => {
+    this.props.updateMaxInvestment(event.target.value)
+  }
+
+  handleClick = () => {
+    this.props.updateTrade()
+    this.props.startTrades()
+  }
+
   render() {
-    // debugger
     return (
       <div className="input-form">
         <form >
           <label>What is your maximum investment?</label>
           <br></br>
-          <input type= "text" value= {this.props.maxInvestment} onChange={this.props.changeMaxInvestment}></input>
+          <input type= "text"
+            value= {this.props.maxInvestment}
+            onChange={this.handleChange}></input>
           <br></br>
           {/* <label>What is your base currency?</label>
           <br></br>
@@ -19,9 +30,9 @@ class Inputs extends Component {
           <input type="radio" value="EUR" name="EUR" onChange={this.props.changeBaseCurrency} />
           <br></br> */}
           <button
-            onClick= {() => this.props.toggleTrade()}
+            onClick= {this.handleClick}
           >
-            {this.props.tradeOn ? "Stop Trading" :  "Start Trading"}
+            {this.props.trade ? "Stop Trading" :  "Start Trading"}
           </button>
         </form>
       </div>
@@ -29,13 +40,13 @@ class Inputs extends Component {
   }
 }
 
-  const mapStateToProps = (state) => {
-    return {
-      allCurrencies:state.allCurrencies,
-      maxInvestment:state.maxInvestment,
-      baseCurrency:state.baseCurrency,
-      tradeOn: state.tradeOn
-    }
-  }
+  // const mapStateToProps = (state) => {
+  //   return {
+  //     allCurrencies:state.allCurrencies,
+  //     maxInvestment:state.maxInvestment,
+  //     baseCurrency:state.baseCurrency,
+  //     tradeOn: state.tradeOn
+  //   }
+  // }
 
-export default connect(mapStateToProps, {changeMaxInvestment, changeBaseCurrency, toggleTrade})(Inputs);
+export default (Inputs);
