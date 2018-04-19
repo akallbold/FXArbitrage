@@ -2,20 +2,99 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "author": "Anna Kallenborn",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akallbold/FXArbitrage.git"
+  },
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/node_modules/regenerator-runtime/runtime"
+    ],
+    "moduleNameMapper": {
+      "^.*\\.scss$": "<rootDir>/__mocks__/styleMock.js",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.css$": "identity-obj-proxy"
+    },
+    "transform": {
+      ".": "<rootDir>/node_modules/jest-css-modules"
+    },
+    "modulePaths": [
+      "<rootDir>/client/shell",
+      "<rootDir>/client/shell/assets",
+      "<rootDir>/client/shell/components",
+      "<rootDir>/client/shell/pusher_service",
+      "<rootDir>/client/shell/selectors",
+      "<rootDir>/client/shell/sagas",
+      "<rootDir>/client/shell/reducers",
+      "<rootDir>/client/shell/api",
+      "<rootDir>/client/shell/action"
+    ],
+    "collectCoverage": true,
+    "coverageReporters": [
+      "json",
+      "html"
+    ]
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "dotenv": "^2.0.0",
+    "dotenv-webpack": "^1.4.2",
+    "husky": "^0.15.0-rc.4",
+    "jest": "^22.4.3",
+    "jest-cli": "^21.2.1",
+    "webpack-dev-middleware": "^1.10.1",
+    "webpack-dev-server": "^2.3.0"
+  },
   "dependencies": {
+    "axios": "^0.15.2",
+    "axios-mock-adapter": "^1.9.0",
+    "enzyme": "^2.8.0",
+    "enzyme-to-json": "^1.5.1",
     "lodash": "^4.17.5",
+    "mocha": "^3.1.2",
     "react": "^16.3.1",
+    "react-bootstrap": "^0.30.6",
     "react-dom": "^16.3.1",
+    "react-modal": "^3.0.0",
     "react-redux": "^5.0.7",
+    "react-router": "^4.0.0",
+    "react-router-dom": "^4.0.0",
     "react-scripts": "1.1.4",
     "react-table": "^6.8.0",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "reselect": "^3.0.1",
+    "webpack": "^3.4.1",
+    "webpack-hot-middleware": "^2.17.1",
+    "webpack-s3-plugin": "^1.0.0-rc.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dll:build": "webpack --config=webpack.dll.shell.config.js",
+    "dev": "yarn server:dev",
+    "server:dev": "env $(cat .env) nodemon server/app.js --watch server --exec babel-node",
+    "server:lint": "eslint server",
+    "build:dev:legacy": "rm -rf build/legacy && webpack --config=webpack.legacy.dev.config.js --progress",
+    "build:dev:portal": "rm -rf build/portal && webpack --config=webpack.portal.dev.config.js --display-error-details",
+    "build:dev:shell": "rm -rf build/shell && webpack --config=webpack.shell.config.js --progress",
+    "build:dev": "rm -rf build && yarn build:dev:legacy && yarn build:dev:portal && yarn build:dev:shell",
+    "build:client": "webpack -p --config=webpack.portal.production.config.js && webpack -p --config=webpack.legacy.production.config.js && webpack -p --config=webpack.shell.production.config.js",
+    "build:server": "babel -d ./build ./server -s",
+    "uppsg": "yarn upgrade playa-styleguide --ignore-engines",
+    "heroku-postbuild": "yarn uppsg && yarn build:client && yarn build:server",
+    "start": "node ./build/app.js",
+    "test": "yarn lint:shell && jest",
+    "test:watch": "jest --watch",
+    "test:server": "yarn lint:server && mocha --recursive --compilers js:babel-register --require babel-polyfill",
+    "test:server:watch": "mocha --recursive --watch --compilers js:babel-register --require babel-polyfill",
+    "lint:shell": "standard --verbose \"./client/shell/**/*.js\" | snazzy",
+    "lint:shell:fix": "standard --fix \"./client/shell/**/*.js\" | snazzy",
+    "lint:server": "standard --verbose \"./server/**/*.js\" | snazzy",
+    "lint:server:fix": "standard --fix \"./server/**/*.js\" | snazzy",
+    "flow:shell": "flow server"
   }
 }
