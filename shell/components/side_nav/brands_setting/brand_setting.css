@@ -1,0 +1,81 @@
+@import '../../../../../node_modules/playa-styleguide/src/stylesheets/variables.css';
+
+.statusWrapper {
+  display: flex;
+  align-self: center;
+}
+.status {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background-color: var(--green);
+}
+
+.brandItem {
+  display: flex;
+  height: 15px; 
+  width: 222px;
+  padding: 5px;
+  margin-top: 15px;
+}
+
+.brandContent {
+  display: flex;
+  align-self: center;
+}
+
+.brandItemInactive {
+  background-color: var(--white);
+  padding-left: 7px;
+}
+
+.brandItemActive {
+  background-color: var(--hyfn-blue-light-fill);
+  border-bottom: 1px solid var(--hyfn-blue-light-border);
+  border-left: 3px solid var(--hyfn-blue);
+}
+
+.brandItemInactive ~ .brandItemActive {
+  border-bottom: 1px solid var(--hyfn-blue-light-border);
+}
+
+.icon {
+  margin: 0 13px 0 17px;
+}
+
+.icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+.brandItemActive .icon svg {
+  fill: var(--hyfn-blue);
+}
+
+.brandItemInactive .icon svg {
+  fill: var(--text-grey-light);
+}
+
+.brands {
+  display: flex;
+  align-self: center;
+  padding-left: 20px;
+  height: 14px;
+  width: 54px;
+  color: var(--text-grey-light);
+  font-family: var(--font-family-regular);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 14px;
+}
+
+.name {
+  height: 17px;
+  width: 132px;
+  color: var(--text-grey-dark);
+  font-family: var(--font-family-regular);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 17px;
+  text-transform: capitalize;
+}

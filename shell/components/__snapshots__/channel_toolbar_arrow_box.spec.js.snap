@@ -1,0 +1,199 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ArrowBox renders correctly when facebook 1`] = `
+<div
+  className="wrapper"
+>
+  <div
+    className="facebook box colorIcon"
+  >
+    <test-file-stub
+      className="facebookIcon"
+      preserveAspectRatio="xMidYMid"
+      viewBox="0 0 8 15"
+    />
+    <test-file-stub
+      className="instagramIcon"
+      preserveAspectRatio="xMidYMid"
+      viewBox="0 0 15 15"
+    />
+  </div>
+  <div
+    className="otherActiveChannels"
+  >
+    <div
+      className="greyIcon"
+    >
+      <test-file-stub
+        className="twitterIcon"
+      />
+    </div>
+    <div
+      className="greyIcon"
+    >
+      <test-file-stub
+        className="pinterestIcon"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ArrowBox renders correctly when pinterest 1`] = `
+<div
+  className="wrapper"
+>
+  <div
+    className="pinterest box colorIcon"
+  >
+    <test-file-stub
+      className="pinterestIcon"
+    />
+  </div>
+  <div
+    className="otherActiveChannels"
+  >
+    <div
+      className="greyIcon"
+    >
+      <test-file-stub
+        className="twitterIcon"
+      />
+    </div>
+    <div
+      className="greyIcon"
+    >
+      <test-file-stub
+        className="facebookIcon"
+        preserveAspectRatio="xMidYMid"
+        viewBox="0 0 8 15"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ArrowBox renders correctly when snapchat 1`] = `
+<div
+  className="wrapper"
+>
+  <div
+    className="snapchat box colorIcon"
+  >
+    <test-file-stub
+      className="snapchatIcon"
+      preserveAspectRatio="xMidYMid"
+      viewBox="0 0 18 17"
+    />
+  </div>
+  <div
+    className="otherActiveChannels"
+  >
+    <div
+      className="greyIcon"
+    >
+      <test-file-stub
+        className="twitterIcon"
+      />
+    </div>
+    <div
+      className="greyIcon"
+    >
+      <test-file-stub
+        className="facebookIcon"
+        preserveAspectRatio="xMidYMid"
+        viewBox="0 0 8 15"
+      />
+    </div>
+    <div
+      className="greyIcon"
+    >
+      <test-file-stub
+        className="pinterestIcon"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ArrowBox renders correctly when twitter 1`] = `
+<div
+  className="wrapper"
+>
+  <div
+    className="twitter box colorIcon"
+  >
+    <test-file-stub
+      className="twitterIcon"
+    />
+  </div>
+  <div
+    className="otherActiveChannels"
+  >
+    <div
+      className="greyIcon"
+    >
+      <test-file-stub
+        className="facebookIcon"
+        preserveAspectRatio="xMidYMid"
+        viewBox="0 0 8 15"
+      />
+    </div>
+    <div
+      className="greyIcon"
+    >
+      <test-file-stub
+        className="pinterestIcon"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ArrowBox renders with a title if there is a title 1`] = `
+<div
+  className="wrapper"
+>
+  <div
+    className="snapchat box colorIcon"
+  >
+    <test-file-stub
+      className="snapchatIcon"
+      preserveAspectRatio="xMidYMid"
+      viewBox="0 0 18 17"
+    />
+  </div>
+  <div
+    className="otherActiveChannels"
+  >
+    <div
+      className="greyIcon"
+    >
+      <test-file-stub
+        className="twitterIcon"
+      />
+    </div>
+    <div
+      className="greyIcon"
+    >
+      <test-file-stub
+        className="facebookIcon"
+        preserveAspectRatio="xMidYMid"
+        viewBox="0 0 8 15"
+      />
+    </div>
+    <div
+      className="greyIcon"
+    >
+      <test-file-stub
+        className="pinterestIcon"
+      />
+    </div>
+  </div>
+  <h1
+    className="title"
+  >
+    title
+  </h1>
+</div>
+`;

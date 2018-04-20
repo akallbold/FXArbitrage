@@ -1,0 +1,44 @@
+@import 'playa-styleguide/src/stylesheets/variables.css';
+
+.switcher {
+  display: inline-flex;
+  position: relative;
+  font-family: var(--font-family-regular);
+  font-size: 12px;
+  font-weight: 600;
+  max-width: 300px;
+  transition: all 1s ease-out;
+}
+
+:global(.no-content).switcher {
+  max-width: 50px;
+}
+
+.button {
+  cursor: pointer;
+}
+
+.secondaryText {
+  margin-bottom: 5px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.primaryText {
+  white-space: nowrap;
+  color: var(--white);
+  font-size: 14px;
+}
+
+.downArrowIcon {
+  display: inline-block;
+  fill: var(--white);
+  width: 10px;
+  margin: 0 0 0 9px;
+}
+
+.tinySpinner {
+  width: 14px;
+  height: 14px;
+  opacity: 0.7;
+  margin-top: -3px;
+}

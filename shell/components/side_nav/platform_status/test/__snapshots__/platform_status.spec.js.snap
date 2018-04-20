@@ -1,0 +1,243 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PlatformStatus /> should render properly given props 1`] = `
+<PlatformStatus
+  currentBrandId="5"
+  platformStatuses={
+    Object {
+      "currentPlatform": "snapchat",
+      "error": null,
+      "facebook": false,
+      "loading": false,
+      "pinterest": true,
+      "snapchat": true,
+      "twitter": false,
+    }
+  }
+  selectedChannel="pinterest"
+>
+  <div>
+    <div
+      className="heading"
+    >
+      Platforms
+    </div>
+    <PlatformStatusItem
+      current={false}
+      handlePlatformClick={null}
+      icon={<test-file-stub />}
+      id="facebook"
+      label="Facebook"
+      status={false}
+      url="/brands/5/facebook/manager/campaigns"
+    >
+      <Connect(Link)
+        className="item false"
+        href="/brands/5/facebook/manager/campaigns"
+        onClick={null}
+      >
+        <Link
+          className="item false"
+          href="/brands/5/facebook/manager/campaigns"
+          location={Object {}}
+          onClick={null}
+          push={[Function]}
+          replace={[Function]}
+        >
+          <a
+            className="item false"
+            href="/brands/5/facebook/manager/campaigns"
+            onClick={[Function]}
+          >
+            <div
+              className="itemContent"
+            >
+              <span
+                className="icon"
+              >
+                <test-file-stub />
+              </span>
+              <span
+                className="name"
+                data-field="name"
+              >
+                Facebook
+              </span>
+            </div>
+          </a>
+        </Link>
+      </Connect(Link)>
+    </PlatformStatusItem>
+    <PlatformStatusItem
+      current={false}
+      handlePlatformClick={null}
+      icon={<test-file-stub />}
+      id="twitter"
+      label="Twitter"
+      status={false}
+      url="/brands/5/twitter/manager/campaigns"
+    >
+      <Connect(Link)
+        className="item false"
+        href="/brands/5/twitter/manager/campaigns"
+        onClick={null}
+      >
+        <Link
+          className="item false"
+          href="/brands/5/twitter/manager/campaigns"
+          location={Object {}}
+          onClick={null}
+          push={[Function]}
+          replace={[Function]}
+        >
+          <a
+            className="item false"
+            href="/brands/5/twitter/manager/campaigns"
+            onClick={[Function]}
+          >
+            <div
+              className="itemContent"
+            >
+              <span
+                className="icon"
+              >
+                <test-file-stub />
+              </span>
+              <span
+                className="name"
+                data-field="name"
+              >
+                Twitter
+              </span>
+            </div>
+          </a>
+        </Link>
+      </Connect(Link)>
+    </PlatformStatusItem>
+    <PlatformStatusItem
+      current={true}
+      handlePlatformClick={[Function]}
+      icon={<test-file-stub />}
+      id="pinterest"
+      label="Pinterest"
+      status={true}
+      url="/brands/5/pinterest/manager/campaigns"
+    >
+      <Connect(Link)
+        className="item itemActive"
+        href="/brands/5/pinterest/manager/campaigns"
+        onClick={[Function]}
+      >
+        <Link
+          className="item itemActive"
+          href="/brands/5/pinterest/manager/campaigns"
+          location={Object {}}
+          onClick={[Function]}
+          push={[Function]}
+          replace={[Function]}
+        >
+          <a
+            className="item itemActive"
+            href="/brands/5/pinterest/manager/campaigns"
+            onClick={[Function]}
+          >
+            <div
+              className="itemContent"
+            >
+              <span
+                className="icon"
+              >
+                <test-file-stub />
+              </span>
+              <span
+                className="name"
+                data-field="name"
+              >
+                Pinterest
+              </span>
+              <span
+                className="status"
+              />
+            </div>
+          </a>
+        </Link>
+      </Connect(Link)>
+    </PlatformStatusItem>
+    <PlatformStatusItem
+      current={false}
+      handlePlatformClick={null}
+      icon={<test-file-stub />}
+      id="snapchat"
+      label="Snapchat"
+      status={true}
+      url="/brands/5/snapchat/manager/campaigns"
+    >
+      <Connect(Link)
+        className="item false"
+        href="/brands/5/snapchat/manager/campaigns"
+        onClick={null}
+      >
+        <Link
+          className="item false"
+          href="/brands/5/snapchat/manager/campaigns"
+          location={Object {}}
+          onClick={null}
+          push={[Function]}
+          replace={[Function]}
+        >
+          <a
+            className="item false"
+            href="/brands/5/snapchat/manager/campaigns"
+            onClick={[Function]}
+          >
+            <div
+              className="itemContent"
+            >
+              <span
+                className="icon"
+              >
+                <test-file-stub />
+              </span>
+              <span
+                className="name"
+                data-field="name"
+              >
+                Snapchat
+              </span>
+              <span
+                className="status"
+              />
+            </div>
+          </a>
+        </Link>
+      </Connect(Link)>
+    </PlatformStatusItem>
+  </div>
+</PlatformStatus>
+`;
+
+exports[`<PlatformStatusItem /> should render properly given props 1`] = `
+<Connect(Link)
+  className="item undefined"
+  href="/facebook"
+>
+  <div
+    className="itemContent"
+  >
+    <span
+      className="icon"
+    >
+      <test-file-stub />
+    </span>
+    <span
+      className="name"
+      data-field="name"
+    >
+      Facebook
+    </span>
+    <span
+      className="status"
+    />
+  </div>
+</Connect(Link)>
+`;
