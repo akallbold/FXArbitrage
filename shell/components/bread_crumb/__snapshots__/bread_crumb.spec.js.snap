@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BreadCrumb /> Brand and campaign BreadCrumbs shows renders 1`] = `
+<div
+  className="wrapper"
+>
+  <BreadCrumbLink
+    brandId="5"
+    channel="facebook"
+    childrenLevel="campaigns"
+    name="My Brand"
+  />
+  <BreadCrumbLink
+    brandId="5"
+    channel="facebook"
+    childrenLevel="adsets"
+    name="Campaign 1"
+  />
+</div>
+`;
+
+exports[`<BreadCrumb /> Brand, campaign, and adset BreadCrumbs shows When parentAdset has campaignGroupId (for FB) renders 1`] = `
+<div
+  className="wrapper"
+>
+  <BreadCrumbLink
+    brandId="5"
+    channel="facebook"
+    childrenLevel="campaigns"
+    name="My Brand"
+  />
+  <BreadCrumbLink
+    brandId="5"
+    channel="facebook"
+    childrenLevel="adsets"
+    name="Campaign 1"
+  />
+  <BreadCrumbLink
+    brandId="5"
+    channel="facebook"
+    childrenLevel="ads"
+    name="Adset 4"
+  />
+</div>
+`;
+
+exports[`<BreadCrumb /> Brand, campaign, and adset BreadCrumbs shows When parentAdset has campaignId renders 1`] = `
+<div
+  className="wrapper"
+>
+  <BreadCrumbLink
+    brandId="5"
+    channel="facebook"
+    childrenLevel="campaigns"
+    name="My Brand"
+  />
+  <BreadCrumbLink
+    brandId="5"
+    channel="facebook"
+    childrenLevel="adsets"
+    name="Campaign 1"
+  />
+  <BreadCrumbLink
+    brandId="5"
+    channel="facebook"
+    childrenLevel="ads"
+    name="Adset 4"
+  />
+</div>
+`;
+
+exports[`<BreadCrumb /> Only brand BreadCrumb shows renders 1`] = `
+<div
+  className="wrapper"
+>
+  <BreadCrumbLink
+    brandId="5"
+    channel="facebook"
+    childrenLevel="campaigns"
+    name="My Brand"
+  />
+</div>
+`;

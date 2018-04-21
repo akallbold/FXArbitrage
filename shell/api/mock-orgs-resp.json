@@ -1,0 +1,135 @@
+{
+  "response": [
+    {
+      "id": 1,
+      "type": "group",
+      "name": "Mullen",
+      "companies": [
+        {
+          "id": 1,
+          "type": "company",
+          "name": "Nike",
+          "brands": [
+            {
+              "id": 1,
+              "name": "Nike\/Football",
+              "type": "brand",
+              "roles": [
+                "administrator"
+              ],
+              "company_id": 1,
+              "advertising_pages": false,
+              "advertising_state": "ready",
+              "tw_advertising_state": "waiting_on_hyfn8",
+              "tw_advertising_state_ready": false,
+              "pt_advertising_enabled": false,
+              "sc_advertising_enabled": false
+            },
+            {
+              "id": 2,
+              "name": "Nike\/Baseball",
+              "type": "brand",
+              "roles": [
+                "administrator"
+              ],
+              "company_id": 1,
+              "advertising_pages": false,
+              "advertising_state": "ready",
+              "tw_advertising_state": "waiting_on_hyfn8",
+              "tw_advertising_state_ready": false,
+              "pt_advertising_enabled": false,
+              "sc_advertising_enabled": false
+            }
+          ],
+          "roles": [
+            "administrator"
+          ]
+        },
+        {
+          "id": 2,
+          "type": "company",
+          "name": "Tommee Tippee",
+          "brands": [
+            {
+              "id": 3,
+              "name": "Explora EasiFlow",
+              "type": "brand",
+              "roles": [
+                "administrator"
+              ],
+              "company_id": 2,
+              "advertising_pages": false,
+              "advertising_state": "ready",
+              "tw_advertising_state": "waiting_on_hyfn8",
+              "tw_advertising_state_ready": false,
+              "pt_advertising_enabled": false,
+              "sc_advertising_enabled": false
+            },
+            {
+              "id": 4,
+              "name": "Sippee Cups",
+              "type": "brand",
+              "roles": [
+                "administrator"
+              ],
+              "company_id": 2,
+              "advertising_pages": false,
+              "advertising_state": "ready",
+              "tw_advertising_state": "waiting_on_hyfn8",
+              "tw_advertising_state_ready": false,
+              "pt_advertising_enabled": false,
+              "sc_advertising_enabled": false
+            }
+          ],
+          "roles": [
+            "administrator"
+          ]
+        },
+        {
+          "id": 3,
+          "type": "company",
+          "name": "Will Co",
+          "brands": [
+            {
+              "id": 5,
+              "name": "FB Test Brand",
+              "type": "brand",
+              "roles": [
+                "administrator"
+              ],
+              "company_id": 3,
+              "advertising_pages": true,
+              "advertising_state": "ready",
+              "tw_advertising_state": "waiting_on_hyfn8",
+              "tw_advertising_state_ready": false,
+              "pt_advertising_enabled": false,
+              "sc_advertising_enabled": false
+            },
+            {
+              "id": 10,
+              "name": "Test Brand 2",
+              "type": "brand",
+              "roles": [
+                "administrator"
+              ],
+              "company_id": 3,
+              "advertising_pages": true,
+              "advertising_state": "ready",
+              "tw_advertising_state": "waiting_on_hyfn8",
+              "tw_advertising_state_ready": false,
+              "pt_advertising_enabled": false,
+              "sc_advertising_enabled": false
+            }
+          ],
+          "roles": [
+            "administrator"
+          ]
+        }
+      ],
+      "roles": [
+        "administrator"
+      ]
+    }
+  ],
+  "count": 1
+}

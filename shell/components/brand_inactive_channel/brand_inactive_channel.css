@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: calc(100vh - 64px);
+}
+
+.innerContainer {
+  width: 300px;
+  text-align: center;
+}
+
+.description {
+  width: 300px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.button {
+  display: inline-block;
+  width: 220px;
+}
+
+/* Non Admin styles */
+:global(.isAnalyst) .button {
+	opacity: 0.5;
+	pointer-events: none;
+}

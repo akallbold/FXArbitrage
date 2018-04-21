@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Page404 /> should render properly given all props 1`] = `
+<div
+  className="errorPage"
+>
+  <Robot404
+    className="image"
+  />
+  <div
+    className="message"
+  >
+    This is not the page you’re looking for...
+  </div>
+  <Button
+    className="button"
+    component={[Function]}
+    disabled={false}
+    href="some/path/here"
+    onClick={null}
+    priority="primary"
+    size="large"
+  >
+    Take me back
+  </Button>
+</div>
+`;
