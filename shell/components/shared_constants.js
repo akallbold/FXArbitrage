@@ -1,5 +1,0 @@
-export const SNAPCHAT = 'snapchat'
-export const FACEBOOK = 'facebook'
-export const PINTEREST = 'pinterest'
-export const TWITTER = 'twitter'
-export const INSTAGRAM = 'instagram'

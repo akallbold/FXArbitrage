@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`<CatchAllPage /> should render properly given all props 1`] = `
-<Page404
-  prevPathname="some/path/here"
-/>
-`;

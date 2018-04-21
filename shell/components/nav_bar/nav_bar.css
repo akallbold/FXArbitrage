@@ -1,5 +1,5 @@
-@import '../../../../node_modules/playa-styleguide/src/stylesheets/variables.css';
-@import '../../stylesheets/component-variables.css';
+import 'FXArbitrage/src/stylesheets/variables.css';
+
 
 .navbar {
   background-color: var(--black);
@@ -55,4 +55,3 @@
 .feeback {
   width: 30px;
 }
-

@@ -24,7 +24,6 @@ export const parseCallType = (callType) => {
  * @param  {String} options.responseKey Key on response object where data is expected to be.
  * @param  {String} options.entity      The target entity key for the response data.
  * @param  {String} options.putType     Tells reducers how to put the data into the entities slice.
- * @param  {String} options.batch       Indicates if this is a batch of concurrent calls or just 1.
  * @return {String}                     A string matching the `callType` convention.
  */
 export const createCallType = ({
@@ -34,7 +33,6 @@ export const createCallType = ({
   putType = 'as',
   batch = '' }
 ) => {
-  const batchWord = batch === 'batchauto' ? 'batchauto' : 'batch'
   const callType = oneLine`
     ${func}
     ${responseKey ? `from ${responseKey}` : ''}
@@ -86,33 +84,3 @@ export const prepConfigForApi = (config) => {
   const { merge, ...apiConfig } = config
   return apiConfig
 }
-
-/**
- * A template literal tag. It's used like this:
- * ```javascript
- * const entityName = ent`${entity}${batch}`
- * ```
- * This little guy puts together the 'batch' version of an entity key if batch is a thing.
- * @param  {Array}  strings   An array of strings that are between the ${}'s
- * @param  {String} entity    The entity key from the `callType`.
- * @param  {String} batch     Will be `'batch'` or not. Also comes from the `callType`.
- * @return {String}           Will either be unchanged `entity` or `entity` with `Batch` appended.
- */
-export const ent = (strings, entity, batch) => `${entity}${batch ? 'Batch' : ''}`
-
-/**
- * Looks at the batch slice of entities data to determine of the batch has completed.
- * @param  {Object} entityData The slice of entities that holds the batch data.
- * @return {Boolean}           Returns true if all items in the batch have either data or an error
- *                             and loading is false
- */
-export const isBatchComplete = entityData => Object.keys(entityData).reduce(
-  (isDone, batchItemKey) => {
-    const { data, error, loading } = entityData[batchItemKey]
-    if ((data || error) && loading === false && isDone) {
-      return true
-    }
-    return false
-  },
-  true
-)

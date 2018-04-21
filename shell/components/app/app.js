@@ -3,31 +3,24 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { includes, some } from 'lodash'
 import { fetchRoutine } from 'fetch_routine'
-import { ACL_GET_USER, ACL_GET_ORGS } from 'api/configs/acl'
-import NavBar from 'components/nav_bar/nav_bar'
-import ChannelToolbarContainer from 'components/channel_toolbar_container/channel_toolbar_container'
+import { SHELL_GET_USER } from 'api/configs/shell'
 import ContentContainer from 'components/content_container/content_container'
-import { getErrorPageType } from 'components/catch_all_page'
-import { currentUserBrandRole } from '../../selectors/org_selectors'
-import { GlobalPreLoader } from 'components/global_pre_loader'
+import MainContainer from 'FXArbitrage/src/MainContainer'
+import { getCurrentUser } from '../../selectors/user_selectors'
 
 class App extends React.Component {
   componentWillMount () {
-    this.props.fetchTrigger({ callType: ACL_GET_USER })
-    this.props.fetchTrigger({ callType: ACL_GET_ORGS })
+    this.props.fetchTrigger({ callType: SHELL_GET_USER })
   }
 
   render () {
-    const { orgs, errorPageType, curRoles } = this.props
-    const unrestrictedRoles = ['administrator', 'advertiser']
-    const isUnrestrictedUser = some(unrestrictedRoles, value => includes(curRoles, value))
+    const { users, errorPageType } = this.props
 
     return (
-      <div className={isUnrestrictedUser ? '' : 'isAnalyst'}>
-        <NavBar companies={orgs.companies} />
+      <div>
+        <NavBar users={users} />
         <ChannelToolbarContainer />
-        <ContentContainer showErrorPage={!!errorPageType} />
-        <GlobalPreLoader />
+        <MainContainer/>
       </div>
     )
   }
@@ -35,7 +28,7 @@ class App extends React.Component {
 
 const mapStateToProps = state => ({
   errorPageType: getErrorPageType(state),
-  curRoles: currentUserBrandRole(state)
+  user: getCurrentUser(state)
 })
 
 const mapDispatchToProps = {
@@ -44,14 +37,12 @@ const mapDispatchToProps = {
 
 App.propTypes = {
   // state props
-  orgs: PropTypes.object,
   errorPageType: PropTypes.string,
   // dispatch props
   fetchTrigger: PropTypes.func.isRequired
 }
 
 App.defaultProps = {
-  orgs: {},
   errorPageType: null
 }
 

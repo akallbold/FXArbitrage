@@ -5,7 +5,6 @@ import { camelizeKeys } from 'humps'
 import api from 'api'
 import fetchRoutine from './fetch-routine'
 import { parseCallType, isBatchComplete, prepPayloadForApi, ent } from './fetch-utils'
-import preFetchers from './pre-fetch'
 
 const callTypeError = action => `fetchSubroutines requires 'callType' on action payload.
 -------------
@@ -19,10 +18,6 @@ export const fetchSubroutine = function * fetchSubroutine (action) {
   const withFetchRoutinePayload = fetchRoutinePayload ? { fetchRoutinePayload } : {}
 
   if (!callType) throw new Error(callTypeError(action))
-
-  // Blocking calls to be made before the fetcher does it's thing.
-  // Eg. Allows us to ensure the user is loaded or pusher is connected.
-  yield call(preFetchers(callType))
 
   try {
     // Dispatch the `FETCH_REQUEST` action: this tells our app the request has started.

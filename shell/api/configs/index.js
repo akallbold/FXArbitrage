@@ -3,9 +3,4 @@
  * @param  {Require Context} context The require context you want to use.
  * @return {Object}                  Object with keys matching filename and values matching module.
  */
-import { subAppApiConfigs } from 'sub_apps'
-import * as acl from './acl'
-
-const { sc, tw, fb, pt } = subAppApiConfigs
-
-export default { acl, sc, tw, pt, fb }
+import * as shell from './shell'

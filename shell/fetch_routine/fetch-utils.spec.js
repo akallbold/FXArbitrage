@@ -24,34 +24,12 @@ describe('parseCallType', () => {
     })
   })
 
-  it('should work with ONLY `merge` putType', () => {
-    const parsedCallType = parseCallType('acl.getUser merge aclUser')
-    expect(parsedCallType).toEqual({
-      func: 'acl.getUser',
-      responseKey: undefined,
-      putType: 'merge',
-      entity: 'aclUser',
-      batch: undefined
-    })
-  })
-
   it('should work with `as` putType AND `from` responseKey', () => {
     const parsedCallType = parseCallType('acl.getUser from userData as aclUser')
     expect(parsedCallType).toEqual({
       func: 'acl.getUser',
       responseKey: 'userData',
       putType: 'as',
-      entity: 'aclUser',
-      batch: undefined
-    })
-  })
-
-  it('should work with `merge` putType AND `from` responseKey', () => {
-    const parsedCallType = parseCallType('acl.getUser from userData merge aclUser')
-    expect(parsedCallType).toEqual({
-      func: 'acl.getUser',
-      responseKey: 'userData',
-      putType: 'merge',
       entity: 'aclUser',
       batch: undefined
     })
@@ -107,17 +85,6 @@ describe('createCallType', () => {
     expect(callType).toEqual('acl.getUser from user as aclUser')
   })
 
-  it('should work with `putType`', () => {
-    const callType = createCallType({
-      func: 'acl.getUser',
-      responseKey: 'user',
-      putType: 'merge',
-      entity: 'aclUser',
-      batch: undefined
-    })
-    expect(callType).toEqual('acl.getUser from user merge aclUser')
-  })
-
   it('should work with `batch` as boolean', () => {
     const callType = createCallType({
       func: 'acl.getUser',
@@ -127,28 +94,6 @@ describe('createCallType', () => {
       batch: true
     })
     expect(callType).toEqual('acl.getUser from user merge aclUser batch')
-  })
-
-  it('should work with `batch` as string', () => {
-    const callType = createCallType({
-      func: 'acl.getUser',
-      responseKey: 'user',
-      putType: 'merge',
-      entity: 'aclUser',
-      batch: 'batch'
-    })
-    expect(callType).toEqual('acl.getUser from user merge aclUser batch')
-  })
-
-  it('should work with `batch` as `batchauto` string', () => {
-    const callType = createCallType({
-      func: 'acl.getUser',
-      responseKey: 'user',
-      putType: 'merge',
-      entity: 'aclUser',
-      batch: 'batchauto'
-    })
-    expect(callType).toEqual('acl.getUser from user merge aclUser batchauto')
   })
 })
 
@@ -164,18 +109,16 @@ describe('getConfig', () => {
     method: 'GET',
     url: 'api/campaigns',
     headers: {},
-    transformResponse: () => {},
-    merge: () => console.log('Ima merging function')
+    transformResponse: () => {}
   }
 
   const configs = {
-    acl: { getUser: () => userConfig },
-    sc: { getCampaigns: () => campaignsConfig },
+    shell: { getUser: () => userConfig },
     test: { getWithParams: ({ id }) => ({ shouldHaveId: `right here ---> ${id}` }) }
   }
 
   it('should return correct config given callType', () => {
-    const config = getConfig(configs, 'acl.getUser as aclUser')
+    const config = getConfig(configs, 'shell.getUser as shellUser')
     expect(config).toEqual(userConfig)
   })
 
@@ -195,12 +138,12 @@ describe('prepPayloadForApi', () => {
       callType: 'acl.getUser as aclUser',
       id: '420',
       fetchRoutinePayload: {
-        batchItemKey: '420'
+        key: '420'
       }
     }
 
     const expectedPayload = {
-      callType: 'acl.getUser as aclUser',
+      callType: 'shell.getUser as shellUser',
       id: '420'
     }
     expect(prepPayloadForApi(payload)).toEqual(expectedPayload)
@@ -208,7 +151,7 @@ describe('prepPayloadForApi', () => {
 
   it('should not throw if `fetchRoutinePayload` is not present', () => {
     const payload = {
-      callType: 'acl.getUser as aclUser',
+      callType: 'shell.getUser as shellUser',
       id: '420'
     }
     expect(prepPayloadForApi(payload)).toEqual(payload)
@@ -217,100 +160,5 @@ describe('prepPayloadForApi', () => {
 
   it('should return null when passed falsey', () => {
     expect(prepPayloadForApi(null)).toEqual(null)
-  })
-})
-
-describe('prepConfigForApi', () => {
-  it('should strip the `merge` function from the axios config', () => {
-    const config = {
-      method: 'PUT',
-      url: '/some/endpoint',
-      headers: {},
-      merge: () => console.log('Ima merge function.')
-    }
-
-    const expectedConfig = {
-      method: 'PUT',
-      url: '/some/endpoint',
-      headers: {}
-    }
-    expect(prepConfigForApi(config)).toEqual(expectedConfig)
-  })
-
-  it('should not throw if `merge` function is not present', () => {
-    const config = {
-      method: 'PUT',
-      url: '/some/endpoint',
-      headers: {}
-    }
-    expect(prepConfigForApi(config)).toEqual(config)
-    expect(prepConfigForApi({})).toEqual({})
-  })
-
-  it('should return null when passed falsey', () => {
-    expect(prepConfigForApi(null)).toEqual(null)
-  })
-})
-
-describe('ent template tag', () => {
-  it('should conditionally add append `Batch` to string', () => {
-    const entity = 'scStuff'
-    expect(ent`${entity}${true}`).toEqual('scStuffBatch')
-  })
-})
-
-describe('isBatchComplete', () => {
-  it('should return true when all batch items have data && loading is false', () => {
-    const batchEntityData = {
-      thing1: { data: {}, error: null, loading: false },
-      thing2: { data: {}, error: null, loading: false }
-    }
-    expect(isBatchComplete(batchEntityData)).toEqual(true)
-  })
-
-  it('should return true when all batch items have error && loading is false', () => {
-    const batchEntityData = {
-      thing1: { data: null, error: {}, loading: false },
-      thing2: { data: null, error: {}, loading: false }
-    }
-    expect(isBatchComplete(batchEntityData)).toEqual(true)
-  })
-
-  it('should return true when all batch items have data or error && loading is false', () => {
-    const batchEntityData = {
-      thing1: { data: null, error: {}, loading: false },
-      thing2: { data: {}, error: null, loading: false }
-    }
-    expect(isBatchComplete(batchEntityData)).toEqual(true)
-  })
-
-  it('should return false when first in batch is not complete', () => {
-    const batchEntityData = {
-      thing1: { data: null, error: null, loading: true },
-      thing2: { data: {}, error: null, loading: false }
-    }
-    expect(isBatchComplete(batchEntityData)).toEqual(false)
-  })
-
-  it('should return false when last in batch is not complete', () => {
-    const batchEntityData = {
-      thing1: { data: {}, error: null, loading: false },
-      thing2: { data: null, error: null, loading: true }
-    }
-    expect(isBatchComplete(batchEntityData)).toEqual(false)
-  })
-
-  it('should return false when shit is all over the place', () => {
-    const batchEntityData = {
-      thing1: { data: null, error: null, loading: false },
-      thing2: { data: {}, error: null, loading: false },
-      thing3: { data: null, error: {}, loading: false },
-      thing4: { data: null, error: null, loading: true },
-      thing5: { data: {}, error: null, loading: true },
-      thing6: { data: null, error: {}, loading: true },
-      thing7: { data: {}, error: {}, loading: false },
-      thing8: { data: {}, error: {}, loading: true }
-    }
-    expect(isBatchComplete(batchEntityData)).toEqual(false)
   })
 })

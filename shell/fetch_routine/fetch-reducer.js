@@ -3,9 +3,7 @@ import {
   requestState,
   successState,
   failureState,
-  fulfillState,
-  clearErrorState,
-  clearDataState
+  fulfillState
 } from './fetch-subreducers'
 import fetchRoutine from './fetch-routine'
 import { CLEAR_ERROR, CLEAR_DATA } from './fetch-actions'

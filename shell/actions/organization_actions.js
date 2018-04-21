@@ -1,15 +1,15 @@
 import formatPayload from './payload_formatter'
 import {
-  SET_CURRENT_ORGANIZATION,
-  SET_CURRENT_ORGANIZATION_INITIAL
+  SET_CURRENT_USER,
+  SET_CURRENT_USER_INITIAL
 } from './constants.js'
 
-export const setCurrentBrand = (brand, override = true) => {
-  const type = override ? SET_CURRENT_ORGANIZATION : SET_CURRENT_ORGANIZATION_INITIAL
+export const setCurrentUser = (user, override = true) => {
+  const type = override ? SET_CURRENT_USER : SET_CURRENT_USER_INITIAL
   return ({
     type,
     payload: formatPayload({
-      data: brand,
+      data: user,
       loading: false
     })
   })

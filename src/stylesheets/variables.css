@@ -1,0 +1,61 @@
+:root {
+  --black: #000000;
+  --white: #FFFFFF;
+  --grey: #DDDDDD;
+  --rgba-black: 0, 0, 0;
+  --rgba-white: 255, 255, 255;
+  --rgba-grey: 221, 221, 221;
+
+  --text-grey-dark: #333333;
+  --text-grey: #666666;
+  --text-grey-light: #999999;
+  --background-grey-dark: #EFEFEF;
+  --background-grey: #F3F3F3;
+  --background-grey-light: #F8F8F8;
+
+  --blue: #0E85E7;
+  --blue-dark: #0A63AD;
+  --blue-light: #4AA3ED;
+
+  --green: #00BF55;
+  --green-dark: #008F3F;
+  --green-light: #40CF7F;
+  --green-light-fill: #F2FCF6;
+  --green-light-border: #B6EDCC;
+
+  --orange: #FCA900;
+  --orange-dark: #BC7E00;
+  --orange-light: #FCBE40;
+
+  --purple: #7D53C4;
+  --purple-dark: #5D3E92;
+  --purple-light: #9D7ED2;
+  --purple-light-fill: #F8F6FC;
+  --purple-light-border: #CEC7D8;
+
+  --red: #E7372D;
+  --red-dark: #AD2921;
+  --red-light: #ED6961;
+  --red-light-fill: #FEF5F4;
+
+  --font-family-regular: 'proxima-nova_regular', sans-serif;
+  --font-family-semibold: 'proxima-nova_semi-bold', sans-serif;
+  --font-family-light: 'proxima-nova_light', sans-serif;
+
+  --base-font-size: 12px;
+  --base-line-height: 1.4;
+  --base-letter-spacing: 0.5px;
+
+  --z-index-1:  100;
+  --z-index-2:  200;
+  --z-index-3:  300;
+  --z-index-4:  400;
+  --z-index-5:  500;
+  --z-index-6:  600;
+  --z-index-7:  700;
+  --z-index-8:  800;
+  --z-index-9:  900;
+  --z-index-10: 1000;
+
+  --standard-shadow: 0px 18px 20px -15px rgba(0, 0, 0, 0.30);
+}

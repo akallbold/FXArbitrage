@@ -14,7 +14,6 @@ export default class Root extends React.Component {
       <Provider store={this.store}>
         <div>
           <App />
-          <PusherConnector />
         </div>
       </Provider>
     )
