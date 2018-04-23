@@ -1,4 +1,3 @@
-import transformOrgs from 'api/transform-orgs'
 
 const BASE = `${process.env.SHELL_HOST}/api`
 const HEADERS = {}

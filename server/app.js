@@ -4,20 +4,6 @@ import helmet from 'helmet'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import path from 'path'
-import {
-  login,
-  checkLoggedIn,
-  validateRegistrationToken,
-  getCurrentUser,
-  checkSignUpComplete,
-  setServerAuthToken,
-  unlock,
-  authorize,
-  logout
-} from './services/authentication'
-import {
-  redirectToHttps
-} from './services/security.js'
 
 const publicRoot = path.join(__dirname, '/../public/')
 const buildDir = path.join(__dirname, '/../build/')
@@ -38,8 +24,6 @@ app.use(helmet())
 app.use(express.static(manifestDir))
 app.use(express.static(publicRoot))
 app.use(express.static(buildDir))
-app.use('/assets', express.static(assetsDir))
-app.use('/assets_overwrite', express.static(assetsOverwriteDir))
 app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -56,7 +40,7 @@ app.set('views', path.join(__dirname, '/../public/'))
 app.set('view engine', 'ejs')
 
 /* Default Route */
-app.get('/*', authorize, (req, res) => {
+app.get('/*', (req, res) => {
   res.redirect('/pv')
 })
 

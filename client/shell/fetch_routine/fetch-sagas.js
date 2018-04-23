@@ -1,6 +1,5 @@
 import { call, put, all, takeEvery, select } from 'redux-saga/effects'
 import { get } from 'lodash'
-import { oneLine } from 'common-tags'
 import { camelizeKeys } from 'humps'
 import api from 'api'
 import fetchRoutine from './fetch-routine'
@@ -77,7 +76,7 @@ export const batchFetchSubroutine = function * batchFetchSubroutine (action) {
   const { batch } = parseCallType(callType) || {}
 
   if (!batch) {
-    throw new Error(oneLine`callType: '${callType}' requires batch keyword
+    throw new Error(`callType: '${callType}' requires batch keyword
     when using TRIGGER_BATCH.`)
   }
 
@@ -97,7 +96,7 @@ export const batchCompleteFetchSubroutine = function * batchCompleteFetchSubrout
   const { batch, entity } = parseCallType(callType) || {}
 
   if (!batch) {
-    throw new Error(oneLine`callType: '${callType}' requires batch keyword
+    throw new Error(`callType: '${callType}' requires batch keyword
     when using TRIGGER_BATCH.`)
   }
 

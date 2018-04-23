@@ -5,8 +5,7 @@ import { includes, some } from 'lodash'
 import { fetchRoutine } from 'fetch_routine'
 import { SHELL_GET_USER } from 'api/configs/shell'
 import ContentContainer from 'components/content_container/content_container'
-import MainContainer from 'FXArbitrage/src/MainContainer'
-import { getCurrentUser } from '../../selectors/user_selectors'
+// import { getCurrentUserSelector } from 'FXArbitrage/client/shell/selectors/user_selectors'
 
 class App extends React.Component {
   componentWillMount () {
@@ -14,21 +13,19 @@ class App extends React.Component {
   }
 
   render () {
-    const { users, errorPageType } = this.props
+    const { errorPageType } = this.props
 
     return (
       <div>
-        <NavBar users={users} />
-        <ChannelToolbarContainer />
-        <MainContainer/>
+        <NavBar />
       </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  errorPageType: getErrorPageType(state),
-  user: getCurrentUser(state)
+  errorPageType: getErrorPageType(state)
+  // user: getCurrentUser(state)
 })
 
 const mapDispatchToProps = {

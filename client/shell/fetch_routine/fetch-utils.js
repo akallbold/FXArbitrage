@@ -1,5 +1,4 @@
 import { get } from 'lodash'
-import { oneLine } from 'common-tags'
 
 /**
  * A utility to parse the `callType` string into it's parts: namespaced factory function path,
@@ -33,7 +32,7 @@ export const createCallType = ({
   putType = 'as',
   batch = '' }
 ) => {
-  const callType = oneLine`
+  const callType = `
     ${func}
     ${responseKey ? `from ${responseKey}` : ''}
     ${putType}
@@ -41,7 +40,7 @@ export const createCallType = ({
     ${batch ? batchWord : ''}`
 
   if (!func || !entity || !callType.match(callTypeRegexp)) {
-    throw new Error(oneLine`Cannot create callType. Maybe required \`func\` or \`entity\` props
+    throw new Error(`Cannot create callType. Maybe required \`func\` or \`entity\` props
     are undefined. The callType '${callType}' does not follow the correct format.`)
   }
   return callType

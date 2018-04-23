@@ -1,4 +1,4 @@
-import 'FXArbitrage/src/stylesheets/variables.css';
+@import 'FXArbitrage/src/stylesheets/variables.css';
 
 
 .navbar {

@@ -2,22 +2,20 @@
 <html lang="en">
   <head>
     <script src="https://cdn.ravenjs.com/3.22.1/raven.min.js" crossorigin="anonymous"></script>
-    <title>HYFN8 - Playa</title>
+    <title>Anna Kalla</title>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui"/>
     <meta name="renderer" content="webkit"/>
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <meta name="description" content="HYFN8 Social Media Platform Management">
+    <meta name="description" content="Anna Kalla">
     <link rel="shortcut icon" href="/shell/favicon.ico">
     <% if (process.env.NODE_ENV === 'production' && process.env.GOOGLE_ANALYTICS_TRACKING) { %>
-      <script async src="https://www.googletagmanager.com/gtag/js?id=<%= process.env.GOOGLE_ANALYTICS_TRACKING %>"></script>
       <!-- Global site tag (gtag.js) - Google Analytics -->
       <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', '<%= process.env.GOOGLE_ANALYTICS_TRACKING %>');
       </script>
     <% } %>
     <% if (process.env.NODE_ENV === 'production') { %>
@@ -53,10 +51,6 @@
             'conduitPage'
           ],
           ignoreUrls: [
-            // Facebook flakiness
-            /graph\.facebook\.com/i,
-            // Facebook blocked
-            /connect\.facebook\.net\/en_US\/all\.js/i,
             // Woopra flakiness
             /eatdifferent\.com\.woopra-ns\.com/i,
             /static\.woopra\.com\/js\/woopra\.js/i,
@@ -95,11 +89,6 @@
       window._lload("/lib.js", function () {
         window._lload("/shell/index.bundle.js")
       })
-    </script>
-
-    <script async defer
-      src="//assets.pinterest.com/js/pinit.js"
-      data-pin-build="doBuild">
     </script>
   </body>
 </html>

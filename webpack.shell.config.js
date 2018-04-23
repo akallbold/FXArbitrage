@@ -77,7 +77,7 @@ module.exports = {
         use: jsLoaders,
         include: [
           path.resolve(__dirname, 'client/shell')
-        ].concat(SubAppPathsForDevelopment)
+        ]
       },
       {
         test: /\.svg$/,
