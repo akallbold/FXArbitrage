@@ -12,6 +12,7 @@ import { compact } from 'lodash'
 export const createTradePermutations = (nonBaseCurrencies) => {
   let tradeArray = []
   // TODO: avoid for loops, use map, filter, reduce instead
+  // AKB COMMMENTS: this function will need an overhaul. Its actually a great algorithm question. How to create all permutations of an array with four elements (nonBaseCurrencies). The final list should include arrays of lengths 2 to 4 long and order does matter but there should be no duplicates in the same array. EX: [A,B], [B,A],[B,C,D],[A,B,C,D] are all valid, [A,A,A] is not. For now, I am trying to get the rest of the site working so I am only building permutations of 2 currencies but eventually it should consider all four.
   for (let i=0;i<nonBaseCurrencies.length;i++){
     let currentArray = []
     for (let j=0;j<nonBaseCurrencies.length;j++){
@@ -85,7 +86,7 @@ class MainContainer extends Component {
       })
     // }
   }
-
+//AKB COMMENTS: this is the function where I am gettin stuck. After the function makes the trades it checks to see if any currency pairs made any money (line 111). If it does make money I want to push some information into this.state.successfulTrades array so I can then send the information to the TradesTable to render the successful trades into a table. I don't think the successful trades are being saved, but the last one does go through. I think its replacing the this.state.successfultrades everytime it sets it, instead of adding an object to the array, but when I debug it looks like its not saving it at all. 
   tradeMagic = (currencyPermutation) => {
     let baseCurrency = this.state.baseCurrency
     let currentCurrency = this.state.currentCurrency
