@@ -6,25 +6,28 @@ import React, { Component } from 'react';
 class TradeTable extends Component {
 
 createTradeElements = () => {
-  // console.log("props", this.props.successfulTrades)
-  // debugger
-  return (
-    <tbody>
-      <tr align="center">
-        <td>Apr 16</td>
-        <td>9:00:30AM</td>
-        <td>GBP</td>
-        <td>EUR</td>
-        <td>$1,250</td>
-        <td>$100,001,250</td>
-      </tr>
-    </tbody>
-  )
+  console.log("props", this.props.successfulTrades)
+  return this.props.successfulTrades.map(trade => {
+    return (
+      <tbody>
+        <tr align="center">
+          <td>{trade.time.getUTCMonth()}</td>
+          <td>{trade.time.getHours()}</td>
+          <td>{trade.currencyPermutation[0]}</td>
+          <td>{trade.currencyPermutation[1]}</td>
+          <td>{trade.currencyPermutation[2] ? trade.currencyPermutation[2] : "None" }</td>
+          <td>{trade.currencyPermutation[3] ? trade.currencyPermutation[3] : "None" }</td>
+          <td>${trade.profits}</td>
+          <td>$100,001,250</td>
+        </tr>
+      </tbody>
+    )
+  })
 }
 
 
   render() {
-    // debugger
+    // console.log(this.props.successfulTrades)
     return (
     <table className="trade-table">
       <caption>Trades</caption>
@@ -34,12 +37,14 @@ createTradeElements = () => {
           <th>Time</th>
           <th>Trade One</th>
           <th>Trade Two</th>
+          <th>Trade Three</th>
+          <th>Trade Four</th>
           <th>Profit</th>
           <th>Total</th>
         </tr>
       </tbody>
       {this.createTradeElements()}
-      <tbody>
+      {/* <tbody>
         <tr align="center">
           <td>Apr 16</td>
           <td>10:00:30AM</td>
@@ -54,8 +59,8 @@ createTradeElements = () => {
           <td>Apr 16</td>
           <td>11:00:30AM</td>
           <td>GBP</td>
-          <td>JPY</td>
-          <td>$500</td>
+          <td>JPY</td> */}
+          {/* <td>$500</td>
           <td>$100,002,750</td>
         </tr>
       </tbody>
@@ -78,7 +83,7 @@ createTradeElements = () => {
           <td>$2,500</td>
           <td>$100,005,250</td>
         </tr>
-      </tbody>
+      </tbody> */}
     </table>
   )}
 }

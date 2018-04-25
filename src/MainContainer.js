@@ -18,7 +18,7 @@ class MainContainer extends Component {
     currentMoney: 0,
     maxInvestment: 100000000,
     nonBaseCurrencies:["EUR", "GBP", "JPY", "AUD"],
-    numberOfTrades:0,
+    // numberOfTrades:0,
     successfulTrades:[],
     timeOfLastFetch: "",
     trade: false,
@@ -76,45 +76,44 @@ class MainContainer extends Component {
   }
 
   startTrades = () => {
+    // console.log(this.state.tradePermutations)
     // if (this.state.trade){
-      this.state.tradePermutations.forEach(currencyPair => {
-        this.tradeMagic(currencyPair)
+      this.state.tradePermutations.forEach(currencyPermutation => {
+        this.tradeMagic(currencyPermutation)
       })
     // }
   }
 
-  tradeMagic = (currencyPair) => {
+  tradeMagic = (currencyPermutation) => {
     let baseCurrency = this.state.baseCurrency
     let currentCurrency = this.state.currentCurrency
     let currentMoney = this.state.maxInvestment
-    let tradeNumber = this.state.numberOfTrades
-    for (let i=0;i<3;i++){
-      if (tradeNumber === 0) {
-        currentMoney *= this.state[baseCurrency][currencyPair[0]]
-        currentCurrency = currencyPair[0]
-      } else if (tradeNumber === 1) {
+    // let tradeNumber = this.state.numberOfTrades
+    for (let i=0;i<currencyPermutation.length;i++){
+      if (i === 0) {
+        currentMoney *= this.state[baseCurrency][currencyPermutation[0]]
+        currentCurrency = currencyPermutation[0]
+      } else if (i !== currencyPermutation.length && i !== 0) {
         // debugger
-        currentMoney *= this.state[currentCurrency][currencyPair[1]]
-        currentCurrency = currencyPair[1]
-      } else if(tradeNumber === 2){
+        currentMoney *= this.state[currentCurrency][currencyPermutation[1]]
+        currentCurrency = currencyPermutation[1]
+      } else if(i === currencyPermutation.length){
         currentMoney *= this.state[currentCurrency][baseCurrency]
       } else {
           console.log("error in trademagic")
       }
-      tradeNumber++
+      // tradeNumber++
     }
 
     if (currentMoney > this.state.maxInvestment){
-      console.log(`YOU EARNED $${currentMoney - this.state.maxInvestment}`)
-      let newArray = this.state.successfulTrades.push({time:this.state.timeOfLastFetch, currencyPair:currencyPair, profits:currentMoney - this.state.maxInvestment})
-      this.setState({successfulTrades:newArray}, console.log(this.state.successfulTrades))
-      this.setState({maxInvestment:currentMoney})
+      // debugger
+      let newObject = {time:this.state.timeOfLastFetch, currencyPermutation:currencyPermutation, profits:currentMoney - this.state.maxInvestment}
+      this.setState({successfulTrades:[...this.state.successfulTrades,newObject]})
     } else if (currentMoney === this.state.maxInvestment){
-      console.log("You did not earn any money off this trade", currencyPair)
+      // console.log("You did not earn any money off this trade", currencyPermutation)
     } else {
-      console.log("Something went wrong")
+      // console.log("You lost money- don't do this trade")
     }
-    // debugger
   }
 
 
@@ -122,7 +121,7 @@ class MainContainer extends Component {
 
 
   render() {
-    console.log("trade",this.state.trade)
+    console.log("trade",this.state.currentMoney)
     return (
       <div className="main-container">
         <CurrencyRates USD= {this.state.USD}
