@@ -2,11 +2,30 @@ import React, { Component } from 'react';
 import CurrencyRates from './CurrencyRates'
 import Inputs from './Inputs'
 import TradeTable from './TradeTable'
-// import { get } from 'lodash'
+import { compact } from 'lodash'
 // import {connect} from "react-redux"
 // import {fetchRates, createTradePermutations, changeCurrentMoney, exchange, updateCurrency, increaseTradeCount} from "./actions"
 // import config from './config.js'
 // let mykey = config.API_KEY;
+
+// Anna, I put this here because now it is reachable by tests
+export const createTradePermutations = (nonBaseCurrencies) => {
+  let tradeArray = []
+  // TODO: avoid for loops, use map, filter, reduce instead
+  for (let i=0;i<nonBaseCurrencies.length;i++){
+    let currentArray = []
+    for (let j=0;j<nonBaseCurrencies.length;j++){
+      currentArray.push(nonBaseCurrencies[i])
+      if (!currentArray.includes(nonBaseCurrencies[j])){
+        currentArray.push(nonBaseCurrencies[j])
+        let uniqueItems = Array.from(new Set(currentArray))
+        tradeArray.push(uniqueItems)
+        currentArray=[]
+      }
+    }
+  }
+  return tradeArray
+}
 
 class MainContainer extends Component {
 
@@ -32,7 +51,7 @@ class MainContainer extends Component {
 
   componentDidMount = () => {
     this.getRates(this.state.allCurrencies);
-    this.createTradePermutations();
+    this.setState({tradePermutations: createTradePermutations(this.state.nonBaseCurrencies)})
   }
 
   getRates = (currencyArray) => {
@@ -48,23 +67,6 @@ class MainContainer extends Component {
       this.setState({[data.base]: data.rates, timeOfLastFetch: new Date()})
       // this.setState({timeOfLastFetch: Time.now})
     })
-  }
-
-  createTradePermutations = () => {
-    let tradeArray = []
-    for (let i=0;i<this.state.nonBaseCurrencies.length;i++){
-      let currentArray = []
-      for (let j=0;j<this.state.nonBaseCurrencies.length;j++){
-        currentArray.push(this.state.nonBaseCurrencies[i])
-        if (!currentArray.includes(this.state.nonBaseCurrencies[j])){
-          currentArray.push(this.state.nonBaseCurrencies[j])
-          let uniqueItems = Array.from(new Set(currentArray))
-          tradeArray.push(uniqueItems)
-          currentArray=[]
-        }
-      }
-    }
-    this.setState({tradePermutations: tradeArray})
   }
 
   updateMaxInvestment = (input) => {
