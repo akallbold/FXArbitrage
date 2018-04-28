@@ -6,10 +6,10 @@ import React, { Component } from 'react';
 class TradeTable extends Component {
 
 createTradeElements = () => {
-  console.log("props", this.props.successfulTrades)
-  return this.props.successfulTrades.map(trade => {
+  // console.log("props", this.props.successfulTrades)
+  return this.props.successfulTrades.map((trade, i) => {
     return (
-      <tbody>
+      <tbody key= {i}>
         <tr align="center">
           <td>{trade.time.getUTCMonth()}</td>
           <td>{trade.time.getHours()}</td>

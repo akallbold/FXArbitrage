@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import CurrencyRates from './CurrencyRates'
 import Inputs from './Inputs'
 import TradeTable from './TradeTable'
-import { compact } from 'lodash'
+// import { compact } from 'lodash'
 // import {connect} from "react-redux"
 // import {fetchRates, createTradePermutations, changeCurrentMoney, exchange, updateCurrency, increaseTradeCount} from "./actions"
 // import config from './config.js'
@@ -77,43 +77,30 @@ class MainContainer extends Component {
   }
 
   startTrades = () => {
-    // console.log(this.state.tradePermutations)
     // if (this.state.trade){
 
-    const { tradePermutations, successfulTrades } = this.state;
-
-      // tradePermutations.forEach(currencyPermutation => {
-      //   this.tradeMagic(currencyPermutation)
-      // })
-
-      const successfulTradePermutations = tradePermutations.reduce((acc, permutation) => {
-        const successfulTrade = this.tradeMagic(permutation);
-        if (successfulTrade) {
-          acc.push(successfulTrade);
-        }
-        return acc;
-      }, []);
-      this.setState({
-        successfulTrades: [
-          ...this.state.successfulTrades,
-          ...successfulTradePermutations
-        ]
-      });
-      console.log(this.state, 'final state')
-    // }
+    // let { tradePermutations, successfulTrades } = this.state;
+    let successfulTradePermutations = this.state.tradePermutations.reduce((acc, permutation) => {
+      const successfulTrade = this.tradeMagic(permutation);
+      if (successfulTrade) {
+        acc.push(successfulTrade);
+      }
+      return acc;
+    }, []);
+    this.setState({
+      successfulTrades: [...this.state.successfulTrades, ...successfulTradePermutations]
+    });
   }
-//AKB COMMENTS: this is the function where I am gettin stuck. After the function makes the trades it checks to see if any currency pairs made any money (line 111). If it does make money I want to push some information into this.state.successfulTrades array so I can then send the information to the TradesTable to render the successful trades into a table. I don't think the successful trades are being saved, but the last one does go through. I think its replacing the this.state.successfultrades everytime it sets it, instead of adding an object to the array, but when I debug it looks like its not saving it at all.
+
   tradeMagic = (currencyPermutation) => {
     let baseCurrency = this.state.baseCurrency
     let currentCurrency = this.state.currentCurrency
     let currentMoney = this.state.maxInvestment
-    // let tradeNumber = this.state.numberOfTrades
     for (let i=0;i<currencyPermutation.length;i++){
       if (i === 0) {
         currentMoney *= this.state[baseCurrency][currencyPermutation[0]]
         currentCurrency = currencyPermutation[0]
       } else if (i !== currencyPermutation.length && i !== 0) {
-        // debugger
         currentMoney *= this.state[currentCurrency][currencyPermutation[1]]
         currentCurrency = currencyPermutation[1]
       } else if(i === currencyPermutation.length){
@@ -121,18 +108,11 @@ class MainContainer extends Component {
       } else {
           console.log("error in trademagic")
       }
-      // tradeNumber++
     }
 
     if (currentMoney > this.state.maxInvestment){
-      // debugger
       let newObject = {time:this.state.timeOfLastFetch, currencyPermutation:currencyPermutation, profits:currentMoney - this.state.maxInvestment}
       return newObject;
-      // this.setState({successfulTrades:[...this.state.successfulTrades,newObject]},  () => console.log('State updated', this.state))
-    } else if (currentMoney === this.state.maxInvestment){
-      // console.log("You did not earn any money off this trade", currencyPermutation)
-    } else {
-      // console.log("You lost money- don't do this trade")
     }
   }
 
@@ -141,7 +121,7 @@ class MainContainer extends Component {
 
 
   render() {
-    console.log("trade",this.state.currentMoney)
+    // console.log("trade",this.state.currentMoney)
     return (
       <div className="main-container">
         <CurrencyRates USD= {this.state.USD}
