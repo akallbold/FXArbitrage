@@ -8,17 +8,18 @@ class TradeTable extends Component {
 createTradeElements = () => {
   // console.log("props", this.props.successfulTrades)
   return this.props.successfulTrades.map((trade, i) => {
+    // totalProfits += trade.roundedProfits
     return (
       <tbody key= {i}>
         <tr align="center">
-          <td>{trade.time.getUTCMonth()}</td>
-          <td>{trade.time.getHours()}</td>
+          <td>{trade.time.toLocaleDateString()}</td>
+          <td>{trade.time.toLocaleTimeString()}</td>
           <td>{trade.currencyPermutation[0]}</td>
           <td>{trade.currencyPermutation[1]}</td>
           <td>{trade.currencyPermutation[2] ? trade.currencyPermutation[2] : "None" }</td>
           <td>{trade.currencyPermutation[3] ? trade.currencyPermutation[3] : "None" }</td>
           <td>${trade.profits}</td>
-          <td>$100,001,250</td>
+          {/* <td>$100,001,250</td> */}
         </tr>
       </tbody>
     )
@@ -40,7 +41,7 @@ createTradeElements = () => {
           <th>Trade Three</th>
           <th>Trade Four</th>
           <th>Profit</th>
-          <th>Total</th>
+          {/* <th>Total</th> */}
         </tr>
       </tbody>
       {this.createTradeElements()}
