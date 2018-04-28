@@ -38,7 +38,6 @@ class MainContainer extends Component {
     currentMoney: 0,
     maxInvestment: 100000000,
     nonBaseCurrencies:["EUR", "GBP", "JPY", "AUD"],
-    // numberOfTrades:0,
     successfulTrades:[],
     timeOfLastFetch: "",
     trade: false,
@@ -66,7 +65,6 @@ class MainContainer extends Component {
     .then(response => response.json())
     .then(data => {
       this.setState({[data.base]: data.rates, timeOfLastFetch: new Date()})
-      // this.setState({timeOfLastFetch: Time.now})
     })
   }
 
@@ -81,12 +79,30 @@ class MainContainer extends Component {
   startTrades = () => {
     // console.log(this.state.tradePermutations)
     // if (this.state.trade){
-      this.state.tradePermutations.forEach(currencyPermutation => {
-        this.tradeMagic(currencyPermutation)
-      })
+
+    const { tradePermutations, successfulTrades } = this.state;
+
+      // tradePermutations.forEach(currencyPermutation => {
+      //   this.tradeMagic(currencyPermutation)
+      // })
+
+      const successfulTradePermutations = tradePermutations.reduce((acc, permutation) => {
+        const successfulTrade = this.tradeMagic(permutation);
+        if (successfulTrade) {
+          acc.push(successfulTrade);
+        }
+        return acc;
+      }, []);
+      this.setState({
+        successfulTrades: [
+          ...this.state.successfulTrades,
+          ...successfulTradePermutations
+        ]
+      });
+      console.log(this.state, 'final state')
     // }
   }
-//AKB COMMENTS: this is the function where I am gettin stuck. After the function makes the trades it checks to see if any currency pairs made any money (line 111). If it does make money I want to push some information into this.state.successfulTrades array so I can then send the information to the TradesTable to render the successful trades into a table. I don't think the successful trades are being saved, but the last one does go through. I think its replacing the this.state.successfultrades everytime it sets it, instead of adding an object to the array, but when I debug it looks like its not saving it at all. 
+//AKB COMMENTS: this is the function where I am gettin stuck. After the function makes the trades it checks to see if any currency pairs made any money (line 111). If it does make money I want to push some information into this.state.successfulTrades array so I can then send the information to the TradesTable to render the successful trades into a table. I don't think the successful trades are being saved, but the last one does go through. I think its replacing the this.state.successfultrades everytime it sets it, instead of adding an object to the array, but when I debug it looks like its not saving it at all.
   tradeMagic = (currencyPermutation) => {
     let baseCurrency = this.state.baseCurrency
     let currentCurrency = this.state.currentCurrency
@@ -111,7 +127,8 @@ class MainContainer extends Component {
     if (currentMoney > this.state.maxInvestment){
       // debugger
       let newObject = {time:this.state.timeOfLastFetch, currencyPermutation:currencyPermutation, profits:currentMoney - this.state.maxInvestment}
-      this.setState({successfulTrades:[...this.state.successfulTrades,newObject]})
+      return newObject;
+      // this.setState({successfulTrades:[...this.state.successfulTrades,newObject]},  () => console.log('State updated', this.state))
     } else if (currentMoney === this.state.maxInvestment){
       // console.log("You did not earn any money off this trade", currencyPermutation)
     } else {
