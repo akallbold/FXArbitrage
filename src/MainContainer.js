@@ -5,14 +5,12 @@ import TradeTable from './TradeTable'
 // import { compact } from 'lodash'
 // import {connect} from "react-redux"
 // import {fetchRates, createTradePermutations, changeCurrentMoney, exchange, updateCurrency, increaseTradeCount} from "./actions"
-// import config from './config.js'
-// let mykey = config.API_KEY;
+import API_KEY from './config.js';
 
 // Anna, I put this here because now it is reachable by tests
 export const createTradePermutations = (nonBaseCurrencies) => {
   let tradeArray = []
   // TODO: avoid for loops, use map, filter, reduce instead
-  // AKB COMMMENTS: this function will need an overhaul. Its actually a great algorithm question. How to create all permutations of an array with four elements (nonBaseCurrencies). The final list should include arrays of lengths 2 to 4 long and order does matter but there should be no duplicates in the same array. EX: [A,B], [B,A],[B,C,D],[A,B,C,D] are all valid, [A,A,A] is not. For now, I am trying to get the rest of the site working so I am only building permutations of 2 currencies but eventually it should consider all four.
   for (let i=0;i<nonBaseCurrencies.length;i++){
     let currentArray = []
     for (let j=0;j<nonBaseCurrencies.length;j++){
@@ -53,6 +51,7 @@ class MainContainer extends Component {
     this.getRates(this.state.allCurrencies);
     this.setState({tradePermutations: createTradePermutations(this.state.nonBaseCurrencies)})
     this.startTrades()
+    // debugger
   }
 
   // componentDidUpdate = () => {
@@ -66,7 +65,8 @@ class MainContainer extends Component {
   }
 
   fetchRates = (currency) => {
-    fetch(`http://data.fixer.io/api/latest?access_key=163d5e4c148ba5fa464c57d6873e9e95&base=${currency}&symbols=USD,AUD,EUR,JPY,GBP`)
+    // debugger
+    fetch(`http://data.fixer.io/api/latest?access_key=${API_KEY}&base=${currency}&symbols=USD,AUD,EUR,JPY,GBP`)
     .then(response => response.json())
     .then(data => {
       this.setState({[data.base]: data.rates, timeOfLastFetch: new Date()})
