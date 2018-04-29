@@ -9,21 +9,38 @@ import API_KEY from './config.js';
 
 // Anna, I put this here because now it is reachable by tests
 export const createTradePermutations = (nonBaseCurrencies) => {
-  let tradeArray = []
-  // TODO: avoid for loops, use map, filter, reduce instead
-  for (let i=0;i<nonBaseCurrencies.length;i++){
-    let currentArray = []
-    for (let j=0;j<nonBaseCurrencies.length;j++){
-      currentArray.push(nonBaseCurrencies[i])
-      if (!currentArray.includes(nonBaseCurrencies[j])){
-        currentArray.push(nonBaseCurrencies[j])
-        let uniqueItems = Array.from(new Set(currentArray))
-        tradeArray.push(uniqueItems)
-        currentArray=[]
-      }
+  let fourArrays = permute(nonBaseCurrencies)
+  let threeArrays = fourArrays.map(array => {
+    return array.slice(0,3)
+  })
+  let twoArrays = threeArrays.map(array => {
+    return array.slice(0,2)
+  })
+  let allArrays = [...fourArrays, ...threeArrays, ...twoArrays]
+  return allArrays
+}
+
+function permute(permutation) {
+  var length = permutation.length,
+      result = [permutation.slice()],
+      c = new Array(length).fill(0),
+      i = 1, k, p;
+
+  while (i < length) {
+    if (c[i] < i) {
+      k = i % 2 && c[i];
+      p = permutation[i];
+      permutation[i] = permutation[k];
+      permutation[k] = p;
+      ++c[i];
+      i = 1;
+      result.push(permutation.slice());
+    } else {
+      c[i] = 0;
+      ++i;
     }
   }
-  return tradeArray
+  return result;
 }
 
 class MainContainer extends Component {
@@ -50,13 +67,11 @@ class MainContainer extends Component {
   componentDidMount = () => {
     this.getRates(this.state.allCurrencies);
     this.setState({tradePermutations: createTradePermutations(this.state.nonBaseCurrencies)})
-    this.startTrades()
-    // debugger
   }
 
-  // componentDidUpdate = () => {
-  //
-  // }
+  componentWillReceiveProps = () => {
+    this.startTrades()
+  }
 
   getRates = (currencyArray) => {
     currencyArray.forEach(currency => {
@@ -65,7 +80,6 @@ class MainContainer extends Component {
   }
 
   fetchRates = (currency) => {
-    // debugger
     fetch(`http://data.fixer.io/api/latest?access_key=${API_KEY}&base=${currency}&symbols=USD,AUD,EUR,JPY,GBP`)
     .then(response => response.json())
     .then(data => {
@@ -74,17 +88,16 @@ class MainContainer extends Component {
   }
 
   updateMaxInvestment = (input) => {
-    this.setState({maxInvestment:input})
+    let onlyNumbers = input.replace(/\D/g, '');
+    this.setState({maxInvestment:onlyNumbers})
   }
 
   updateTrade = () => {
-    this.setState({trade:!this.state.trade})
+    this.setState({trade:!this.state.trade, successfulTrades:[]}, ()=>this.startTrades())
   }
 
   startTrades = () => {
-    // console.log("in starttrades")
-    // if (this.state.trade){
-      // console.log("trade is on")
+    if (this.state.trade){
       let successfulTradePermutations = this.state.tradePermutations.reduce((acc, permutation) => {
         const successfulTrade = this.tradeMagic(permutation);
         if (successfulTrade) {
@@ -95,8 +108,7 @@ class MainContainer extends Component {
       this.setState({
         successfulTrades: [...this.state.successfulTrades, ...successfulTradePermutations]
       });
-    // console.log("trade is off")
-    // }
+    }
   }
 
   tradeMagic = (currencyPermutation) => {
@@ -106,15 +118,12 @@ class MainContainer extends Component {
 
     for (let i=0;i<=currencyPermutation.length;i++){
       if (i === 0) {
-        console.log("currentmoney in trade magic", currentMoney, i)
         currentMoney *= this.state[baseCurrency][currencyPermutation[0]]
         currentCurrency = currencyPermutation[0]
       } else if (i !== currencyPermutation.length && i !== 0) {
-        console.log("currentmoney in trade magic", currentMoney, i)
         currentMoney *= this.state[currentCurrency][currencyPermutation[1]]
         currentCurrency = currencyPermutation[1]
       } else if(i === currencyPermutation.length){
-        console.log("currentmoney in trade magic", currentMoney, i)
         currentMoney *= this.state[currentCurrency][baseCurrency]
       } else {
           console.log("error in trademagic")
@@ -123,11 +132,8 @@ class MainContainer extends Component {
 
     let roundedProfits = parseFloat(Math.round((currentMoney-this.state.maxInvestment) * 100) / 100).toFixed(2);
     if (roundedProfits>0){
-      console.log("current money in if statement", currentMoney)
-      console.log("maxinvestment", this.state.maxInvestment)
       let newObject = {time:this.state.timeOfLastFetch, currencyPermutation:currencyPermutation, profits:roundedProfits}
       return newObject;
-      debugger
     } else{
       console.log("no trade")
     }
@@ -140,6 +146,7 @@ class MainContainer extends Component {
   render() {
     return (
       <div className="main-container">
+        {/* {this.startTrades()} */}
         <CurrencyRates USD= {this.state.USD}
                        EUR= {this.state.EUR}
                        GBP= {this.state.GBP}
@@ -150,7 +157,8 @@ class MainContainer extends Component {
                 maxInvestment = {this.state.maxInvestment}
                 updateMaxInvestment = {this.updateMaxInvestment}
                 trade = {this.state.trade}
-                updateTrade = {this.updateTrade}/>
+                updateTrade = {this.updateTrade}
+                successfulTrades = {this.state.successfulTrades}/>
         <TradeTable successfulTrades= {this.state.successfulTrades}/>
       </div>
     );

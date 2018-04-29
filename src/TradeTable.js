@@ -6,9 +6,7 @@ import React, { Component } from 'react';
 class TradeTable extends Component {
 
 createTradeElements = () => {
-  // console.log("props", this.props.successfulTrades)
   return this.props.successfulTrades.map((trade, i) => {
-    // totalProfits += trade.roundedProfits
     return (
       <tbody key= {i}>
         <tr align="center">
