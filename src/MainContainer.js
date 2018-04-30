@@ -65,7 +65,7 @@ class MainContainer extends Component {
   }
 
   componentDidMount = () => {
-    this.getRates(this.state.allCurrencies);
+    setInterval(this.getRates(this.state.allCurrencies), 60000);
     this.setState({tradePermutations: createTradePermutations(this.state.nonBaseCurrencies)})
   }
 
@@ -74,9 +74,14 @@ class MainContainer extends Component {
   }
 
   getRates = (currencyArray) => {
+    console.log("in getrates")
     currencyArray.forEach(currency => {
       this.fetchRates(currency)
     })
+  }
+
+  clearPreviousTrades = () => {
+    this.setState({successfulTrades: []})
   }
 
   fetchRates = (currency) => {
@@ -93,7 +98,11 @@ class MainContainer extends Component {
   }
 
   updateTrade = () => {
-    this.setState({trade:!this.state.trade, successfulTrades:[]}, ()=>this.startTrades())
+    this.setState({trade:!this.state.trade}, ()=>this.startTrades())
+  }
+
+  changeBaseCurrency = (currency) => {
+    this.setState({baseCurrency:currency})
   }
 
   startTrades = () => {
@@ -146,7 +155,6 @@ class MainContainer extends Component {
   render() {
     return (
       <div className="main-container">
-        {/* {this.startTrades()} */}
         <CurrencyRates USD= {this.state.USD}
                        EUR= {this.state.EUR}
                        GBP= {this.state.GBP}
@@ -158,7 +166,10 @@ class MainContainer extends Component {
                 updateMaxInvestment = {this.updateMaxInvestment}
                 trade = {this.state.trade}
                 updateTrade = {this.updateTrade}
-                successfulTrades = {this.state.successfulTrades}/>
+                successfulTrades = {this.state.successfulTrades}
+                changeBaseCurrency = {this.changeBaseCurrency}
+                baseCurrency = {this.state.baseCurrency}
+                clearPreviousTrades = {this.clearPreviousTrades}/>
         <TradeTable successfulTrades= {this.state.successfulTrades}/>
       </div>
     );
