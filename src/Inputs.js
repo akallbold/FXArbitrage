@@ -13,6 +13,7 @@ class Inputs extends Component {
     output.totalProfits = parseFloat(Math.round((output.totalProfits) * 100) / 100).toFixed(2);
     return output
   }
+
   handleChange = (event) => {
     this.props.updateMaxInvestment(event.target.value)
     if (this.props.trade){
@@ -26,7 +27,7 @@ class Inputs extends Component {
   }
 
    handleRadioButton = (event) => {
-     console.log(event.target.value)
+     // debugger
     event.preventDefault()
     this.props.changeBaseCurrency(event.target.value)
   }
@@ -40,32 +41,33 @@ class Inputs extends Component {
       <div className="input-form">
         <h2>Rates are updated every 60 seconds</h2>
         <form >
-          <label>What is your maximum investment? (whole currencies only)</label>
+          <label>What is your maximum investment? (whole currencies only)
           <br></br>
           <input type= "text"
             value= {this.props.maxInvestment}
             onChange={this.handleChange}></input>
+            </label>
           <br></br>
           <label>What is your base currency?</label>
           <br></br>
           <label>
-            <input type="radio" value="USD" name="USD" checked= {this.props.baseCurrency === "USD" ? "true" : "false"} onChange={this.props.changeBaseCurrency} />
+            <input type="radio" value="USD" name="currency" defaultChecked= {this.props.baseCurrency === "USD"} onChange={this.handleRadioButton} />
             USD
           </label>
           <label>
-            <input type="radio" value="EUR" name="EUR" checked= {(this.props.baseCurrency === "EUR") ? "true" : "false"} onChange={this.props.changeBaseCurrency} />
+            <input type="radio" value="EUR" name="currency" defaultChecked= {this.props.baseCurrency === "EUR"} onChange={this.handleRadioButton} />
             EUR
           </label>
           <label>
-            <input type="radio" value="AUD" name="AUD" checked= {this.props.baseCurrency === "AUD" ? "true" : "false"} onChange={this.props.changeBaseCurrency} />
+            <input type="radio" value="AUD" name="currency" defaultChecked= {this.props.baseCurrency === "AUD"} onChange={this.handleRadioButton} />
             AUD
           </label>
           <label>
-            <input type="radio" value="JPY" name="JPY" checked= {this.props.baseCurrency === "JPY" ? "true" : "false"} onChange={this.props.changeBaseCurrency} />
+            <input type="radio" value="JPY" name="currency" defaultChecked= {this.props.baseCurrency === "JPY"} onChange={this.handleRadioButton} />
             JPY
           </label>
           <label>
-            <input type="radio" value="GBP" name="GBP" checked= {this.props.baseCurrency === "GBP" ? "true" : "false"} onChange={this.props.changeBaseCurrency} />
+            <input type="radio" value="GBP" name="currency" defaultChecked= {this.props.baseCurrency === "GBP"} onChange={this.handleRadioButton} />
             GBP
           </label>
 
@@ -75,8 +77,8 @@ class Inputs extends Component {
         </form>
 
         <h4>Results: </h4>
-        <h6>{`Total Trades: ${this.calculateTotalProfits().trades}`}</h6>
-        <h6>{`Total Profits: $${this.calculateTotalProfits().totalProfits}`}</h6>
+        <h5>{`Total Trades: ${this.calculateTotalProfits().trades}`}</h5>
+        <h5>{`Total Profits: $${this.calculateTotalProfits().totalProfits}`}</h5>
 
         <button onClick = {this.handleClearClick}>
           Clear Previous Trades

@@ -1,30 +1,59 @@
 .body{
   font-family: 'Lato', sans-serif;
+  background-image: url("NYC.jpg");
+  height:2000px;
+  width:100%;
 }
-
-.currency-table{
-  border: 1px solid black;
-  padding: 15px;
-}
-
 
 .main-container{
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: space-around;
   font-family: 'Lato', sans-serif;
   color: rgb(56,56,56);
+  background-image: url("NYC.jpg");
+  height:100%;
+  width:100%;
 }
 
 .currency-table{
+  width: 60%;
   border: 1px solid black;
-  margin: 10px 0px 0px 10px;
+  margin: 10px 10px 10px 10px;
 }
 
 .input-form{
-  margin: 30px 0px 0px 0px;
+  margin: 10px 10px 10px 10px;
+  width: 35%;
 }
 
 .trade-table{
+  align: center;
+  width: 95%;
   border: 1px solid black;
-  margin: 10px 10px 0px 0px;
+  margin:auto;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+table {
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+}
+
+.top-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.bottom-row{
+width:100%;
+justify-content: center;
+align-content: center;
+text-align:center;
 }

@@ -6,6 +6,57 @@ import React, { Component } from 'react';
 class TradeTable extends Component {
 
 createTradeElements = () => {
+  if (this.props.successfulTrades.length === 0) {
+    for (let i = 0; i<=20;i++){
+      return (
+        <tbody>
+          <tr align="center">
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+          </tr>
+          <tr align="center">
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+          </tr>
+          <tr align="center">
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+          </tr>
+          <tr align="center">
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+          </tr>
+          <tr align="center">
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+          </tr>
+          <tr align="center">
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+          </tr>
+          <tr align="center">
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+          </tr>
+          <tr align="center">
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+          </tr>
+          <tr align="center">
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+          </tr>
+          <tr align="center">
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+          </tr>
+          <tr align="center">
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+          </tr>
+          <tr align="center">
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+          </tr>
+          <tr align="center">
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+          </tr>
+          <tr align="center">
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+          </tr>
+        </tbody>
+      )
+    }
+
+  } else
   return this.props.successfulTrades.map((trade, i) => {
     return (
       <tbody key= {i}>
@@ -17,16 +68,13 @@ createTradeElements = () => {
           <td>{trade.currencyPermutation[2] ? trade.currencyPermutation[2] : "None" }</td>
           <td>{trade.currencyPermutation[3] ? trade.currencyPermutation[3] : "None" }</td>
           <td>${trade.profits}</td>
-          {/* <td>$100,001,250</td> */}
         </tr>
       </tbody>
     )
   })
 }
 
-
   render() {
-    // console.log(this.props.successfulTrades)
     return (
     <table className="trade-table">
       <caption>Trades</caption>
@@ -39,50 +87,9 @@ createTradeElements = () => {
           <th>Trade Three</th>
           <th>Trade Four</th>
           <th>Profit</th>
-          {/* <th>Total</th> */}
         </tr>
       </tbody>
       {this.createTradeElements()}
-      {/* <tbody>
-        <tr align="center">
-          <td>Apr 16</td>
-          <td>10:00:30AM</td>
-          <td>GBP</td>
-          <td>AUD</td>
-          <td>$1,000</td>
-          <td>$100,002,250</td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr align="center">
-          <td>Apr 16</td>
-          <td>11:00:30AM</td>
-          <td>GBP</td>
-          <td>JPY</td> */}
-          {/* <td>$500</td>
-          <td>$100,002,750</td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr align="center">
-          <td>Apr 16</td>
-          <td>11:00:30AM</td>
-          <td>GBP</td>
-          <td>JPY</td>
-          <td>$500</td>
-          <td>$100,002,750</td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr align="center">
-          <td>Apr 16</td>
-          <td>11:00:30AM</td>
-          <td>AUD</td>
-          <td>JPY</td>
-          <td>$2,500</td>
-          <td>$100,005,250</td>
-        </tr>
-      </tbody> */}
     </table>
   )}
 }

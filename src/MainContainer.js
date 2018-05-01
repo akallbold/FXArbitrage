@@ -110,7 +110,7 @@ class MainContainer extends Component {
       let successfulTradePermutations = this.state.tradePermutations.reduce((acc, permutation) => {
         const successfulTrade = this.tradeMagic(permutation);
         if (successfulTrade) {
-          acc.push(successfulTrade);
+          acc.unshift(successfulTrade);
         }
         return acc;
       }, []);
@@ -150,27 +150,31 @@ class MainContainer extends Component {
 
 
 
-
-
   render() {
     return (
       <div className="main-container">
-        <CurrencyRates USD= {this.state.USD}
-                       EUR= {this.state.EUR}
-                       GBP= {this.state.GBP}
-                       AUD= {this.state.AUD}
-                       JPY= {this.state.JPY}
-        />
-        <Inputs startTrades = {this.startTrades}
-                maxInvestment = {this.state.maxInvestment}
-                updateMaxInvestment = {this.updateMaxInvestment}
-                trade = {this.state.trade}
-                updateTrade = {this.updateTrade}
-                successfulTrades = {this.state.successfulTrades}
-                changeBaseCurrency = {this.changeBaseCurrency}
-                baseCurrency = {this.state.baseCurrency}
-                clearPreviousTrades = {this.clearPreviousTrades}/>
-        <TradeTable successfulTrades= {this.state.successfulTrades}/>
+        <h2>Foreign Exchange Arbitrage Simulation</h2>
+        <h5>This is meant to be for demonstrative purposes only. Please do not participate in foreign exchange trading unless you know what you are doing and you have a very fast internet connection.</h5>
+        <div className= "top-row">
+          <CurrencyRates USD= {this.state.USD}
+                         EUR= {this.state.EUR}
+                         GBP= {this.state.GBP}
+                         AUD= {this.state.AUD}
+                         JPY= {this.state.JPY}
+          />
+          <Inputs startTrades = {this.startTrades}
+                  maxInvestment = {this.state.maxInvestment}
+                  updateMaxInvestment = {this.updateMaxInvestment}
+                  trade = {this.state.trade}
+                  updateTrade = {this.updateTrade}
+                  successfulTrades = {this.state.successfulTrades}
+                  changeBaseCurrency = {this.changeBaseCurrency}
+                  baseCurrency = {this.state.baseCurrency}
+                  clearPreviousTrades = {this.clearPreviousTrades}/>
+        </div>
+        <div className = "bottom-row">
+          <TradeTable successfulTrades= {this.state.successfulTrades}/>
+        </div>
       </div>
     );
   }
