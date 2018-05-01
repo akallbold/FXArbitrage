@@ -38,7 +38,7 @@ class Inputs extends Component {
       <div className="input-form">
         <h3>Inputs</h3>
         <form >
-          <label>What is your maximum investment? (whole currencies only)
+          <label>{`What is your maximum investment?`}<br></br>{`(whole ${this.props.baseCurrencySymbol} only)`}
           <br></br>
           <input type= "text"
             value= {this.props.maxInvestment}

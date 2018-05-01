@@ -23,19 +23,33 @@ h2 {
   text-align: center
 }
 
-.currency-table{
-  width: 50%;
-  border: 4px solid black;
-  /* margin: 10px 10px 10px 10px; */
-  margin:auto;
-
+.top-row{
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align:center;
 }
 
 .input-form{
-  margin: 10px 10px 10px 10px;
+  margin: 10px 10px 10px 35px;
   width: 35%;
   border: 4px solid black;
   padding: 10px 10px 10px 10px;
+}
+
+.currency-table{
+  width: 50%;
+  border: 4px solid black;
+  margin: 10px 10px 10px 10px;
+  /* margin:auto; */
+}
+
+.bottom-row{
+width:100%;
+justify-content: center;
+align-content: center;
+text-align:center;
 }
 
 .trade-table{
@@ -54,19 +68,4 @@ table {
 
 th, td {
   padding: 10px;
-}
-
-.top-row{
-  width: 95%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  text-align:center;
-}
-
-.bottom-row{
-width:100%;
-justify-content: center;
-align-content: center;
-text-align:center;
 }
