@@ -20,6 +20,7 @@ createTradeElements = () => {
       return (
         <tbody key= {i}>
           <tr align="center">
+            {/* <td>{trade.best ? "✓" : ""}</td> */}
             <td>{trade.time.toLocaleDateString()}</td>
             <td>{trade.time.toLocaleTimeString()}</td>
             <td>{`${trade.baseCurrencySymbol} ${trade.originalInvestment}`}</td>
@@ -41,6 +42,7 @@ createTradeElements = () => {
       <caption>Trades</caption>
       <tbody>
         <tr align="center">
+          {/* <th>Best Trade</th> */}
           <th>Date</th>
           <th>Time</th>
           <th>Original Investment</th>

@@ -98,6 +98,10 @@ class MainContainer extends Component {
     this.setState({trade:!this.state.trade}, ()=>this.startTrades())
   }
 
+  refreshRates = () => {
+    this.getRates(this.state.allCurrencies)
+  }
+
   changeBaseCurrency = (currency) => {
     let symbol = ""
     switch(currency) {
@@ -119,7 +123,7 @@ class MainContainer extends Component {
     default:
         console.log("error")
     }
-    this.setState({baseCurrency:currency, baseCurrencySymbol:symbol}, ()=> console.log("symbol", this.state.baseCurrencySymbol))
+    this.setState({baseCurrency:currency, baseCurrencySymbol:symbol})
   }
 
   startTrades = () => {
@@ -158,7 +162,7 @@ class MainContainer extends Component {
 
     let roundedProfits = parseFloat(Math.round((currentMoney-this.state.maxInvestment) * 100) / 100).toFixed(2);
     if (roundedProfits>0){
-      let newObject = {time:this.state.timeOfLastFetch, currencyPermutation:currencyPermutation, profits:roundedProfits, originalInvestment:this.state.maxInvestment, baseCurrencySymbol:this.state.baseCurrencySymbol}
+      let newObject = {best: false, time:this.state.timeOfLastFetch, currencyPermutation:currencyPermutation, profits:roundedProfits, originalInvestment:this.state.maxInvestment, baseCurrencySymbol:this.state.baseCurrencySymbol}
       return newObject;
     } else{
       console.log("no trade")
@@ -180,6 +184,7 @@ class MainContainer extends Component {
                   baseCurrency = {this.state.baseCurrency}
                   clearPreviousTrades = {this.clearPreviousTrades}
                   baseCurrencySymbol = {this.state.baseCurrencySymbol}
+                  refreshRates = {this.refreshRates}
           />
           <CurrencyRates USD= {this.state.USD}
                          EUR= {this.state.EUR}

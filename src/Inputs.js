@@ -33,6 +33,10 @@ class Inputs extends Component {
     this.props.clearPreviousTrades()
   }
 
+  handleRefreshClick = () => {
+    this.props.refreshRates()
+  }
+
   render() {
     return (
       <div className="input-form">
@@ -81,6 +85,10 @@ class Inputs extends Component {
 
         <button onClick = {this.handleClearClick}>
           Clear Previous Trades
+        </button>
+        <br></br>
+        <button onClick = {this.handleRefreshClick}>
+          Refresh Rates
         </button>
       </div>
     );
