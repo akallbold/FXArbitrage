@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import CurrencyRates from './CurrencyRates'
 import Inputs from './Inputs'
 import TradeTable from './TradeTable'
-// import { compact } from 'lodash'
-// import {connect} from "react-redux"
-// import {fetchRates, createTradePermutations, changeCurrentMoney, exchange, updateCurrency, increaseTradeCount} from "./actions"
 import API_KEY from './config.js';
 
 // Anna, I put this here because now it is reachable by tests
@@ -48,6 +45,7 @@ class MainContainer extends Component {
   state= {
     allCurrencies:["USD", "EUR", "GBP", "JPY", "AUD"],
     baseCurrency: "USD",
+    baseCurrencySymbol:"$",
     currentCurrency: "USD",
     currentExchange:1,
     currentMoney: 0,
@@ -74,7 +72,6 @@ class MainContainer extends Component {
   }
 
   getRates = (currencyArray) => {
-    console.log("in getrates")
     currencyArray.forEach(currency => {
       this.fetchRates(currency)
     })
@@ -102,7 +99,27 @@ class MainContainer extends Component {
   }
 
   changeBaseCurrency = (currency) => {
-    this.setState({baseCurrency:currency})
+    let symbol = ""
+    switch(currency) {
+    case "USD":
+        symbol = "$"
+        break;
+    case "EUR":
+        symbol = "€"
+        break;
+    case "AUD":
+        symbol = "A$"
+        break;
+    case "JPY":
+        symbol = "¥"
+        break;
+    case "GBP":
+        symbol = "£"
+        break;
+    default:
+        console.log("error")
+    }
+    this.setState({baseCurrency:currency, baseCurrencySymbol:symbol}, ()=> console.log("symbol", this.state.baseCurrencySymbol))
   }
 
   startTrades = () => {
@@ -141,27 +158,18 @@ class MainContainer extends Component {
 
     let roundedProfits = parseFloat(Math.round((currentMoney-this.state.maxInvestment) * 100) / 100).toFixed(2);
     if (roundedProfits>0){
-      let newObject = {time:this.state.timeOfLastFetch, currencyPermutation:currencyPermutation, profits:roundedProfits}
+      let newObject = {time:this.state.timeOfLastFetch, currencyPermutation:currencyPermutation, profits:roundedProfits, originalInvestment:this.state.maxInvestment, baseCurrencySymbol:this.state.baseCurrencySymbol}
       return newObject;
     } else{
       console.log("no trade")
     }
   }
 
-
-
   render() {
     return (
       <div className="main-container">
         <h2>Foreign Exchange Arbitrage Simulation</h2>
-        <h5>This is meant to be for demonstrative purposes only. Please do not participate in foreign exchange trading unless you know what you are doing and you have a very fast internet connection.</h5>
         <div className= "top-row">
-          <CurrencyRates USD= {this.state.USD}
-                         EUR= {this.state.EUR}
-                         GBP= {this.state.GBP}
-                         AUD= {this.state.AUD}
-                         JPY= {this.state.JPY}
-          />
           <Inputs startTrades = {this.startTrades}
                   maxInvestment = {this.state.maxInvestment}
                   updateMaxInvestment = {this.updateMaxInvestment}
@@ -170,10 +178,21 @@ class MainContainer extends Component {
                   successfulTrades = {this.state.successfulTrades}
                   changeBaseCurrency = {this.changeBaseCurrency}
                   baseCurrency = {this.state.baseCurrency}
-                  clearPreviousTrades = {this.clearPreviousTrades}/>
+                  clearPreviousTrades = {this.clearPreviousTrades}
+                  baseCurrencySymbol = {this.state.baseCurrencySymbol}
+          />
+          <CurrencyRates USD= {this.state.USD}
+                         EUR= {this.state.EUR}
+                         GBP= {this.state.GBP}
+                         AUD= {this.state.AUD}
+                         JPY= {this.state.JPY}
+          />
+
         </div>
         <div className = "bottom-row">
-          <TradeTable successfulTrades= {this.state.successfulTrades}/>
+          <TradeTable successfulTrades= {this.state.successfulTrades}
+                      baseCurrencySymbol = {this.state.baseCurrencySymbol}
+          />
         </div>
       </div>
     );

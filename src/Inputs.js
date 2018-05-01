@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-// import {connect} from "react-redux"
-// import {changeMaxInvestment, changeBaseCurrency, tradeMagic, toggleTrade} from "./actions"
 
 class Inputs extends Component {
 
@@ -27,7 +25,6 @@ class Inputs extends Component {
   }
 
    handleRadioButton = (event) => {
-     // debugger
     event.preventDefault()
     this.props.changeBaseCurrency(event.target.value)
   }
@@ -39,14 +36,15 @@ class Inputs extends Component {
   render() {
     return (
       <div className="input-form">
-        <h2>Rates are updated every 60 seconds</h2>
+        <h3>Inputs</h3>
         <form >
           <label>What is your maximum investment? (whole currencies only)
           <br></br>
           <input type= "text"
             value= {this.props.maxInvestment}
+            placeholder = {this.props.baseCurrencySymbol}
             onChange={this.handleChange}></input>
-            </label>
+          </label>
           <br></br>
           <label>What is your base currency?</label>
           <br></br>
@@ -70,7 +68,8 @@ class Inputs extends Component {
             <input type="radio" value="GBP" name="currency" defaultChecked= {this.props.baseCurrency === "GBP"} onChange={this.handleRadioButton} />
             GBP
           </label>
-
+          <br></br>
+          <br></br>
           <button onClick = {this.handleClick}>
             {this.props.trade ? "Stop Trading" :  "Start Trading"}
           </button>
