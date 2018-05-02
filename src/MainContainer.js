@@ -82,7 +82,7 @@ class MainContainer extends Component {
   }
 
   fetchRates = (currency) => {
-    fetch(`http://data.fixer.io/api/latest?access_key=${API_KEY}&base=${currency}&symbols=USD,AUD,EUR,JPY,GBP`)
+    fetch(`https://data.fixer.io/api/latest?access_key=${API_KEY}&base=${currency}&symbols=USD,AUD,EUR,JPY,GBP`)
     .then(response => response.json())
     .then(data => {
       this.setState({[data.base]: data.rates, timeOfLastFetch: new Date()})
