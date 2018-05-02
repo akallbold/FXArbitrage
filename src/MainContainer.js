@@ -73,6 +73,7 @@ class MainContainer extends Component {
 
   getRates = (currencyArray) => {
     currencyArray.forEach(currency => {
+      console.log("in getrates")
       this.fetchRates(currency)
     })
   }
@@ -82,6 +83,7 @@ class MainContainer extends Component {
   }
 
   fetchRates = (currency) => {
+    console.log("in fetchrates")
     fetch(`https://data.fixer.io/api/latest?access_key=${API_KEY}&base=${currency}&symbols=USD,AUD,EUR,JPY,GBP`)
     .then(response => response.json())
     .then(data => {
@@ -99,6 +101,7 @@ class MainContainer extends Component {
   }
 
   refreshRates = () => {
+    console.log("in refresh")
     this.getRates(this.state.allCurrencies)
   }
 

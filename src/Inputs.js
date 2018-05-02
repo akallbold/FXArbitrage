@@ -34,6 +34,7 @@ class Inputs extends Component {
   }
 
   handleRefreshClick = () => {
+    console.log("in handle")
     this.props.refreshRates()
   }
 
