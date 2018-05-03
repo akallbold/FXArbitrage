@@ -1,4 +1,4 @@
-#Foreign Exchange Arbitrage Simulation
+# Foreign Exchange Arbitrage Simulation
 
 This application compares five highly traded currencies and finds trade permutations where you can profit from arbitrage. 
 
