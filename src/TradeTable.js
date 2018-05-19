@@ -38,7 +38,7 @@ createTradeElements = () => {
 
   render() {
     return (
-    <table className="trade-table">
+    <table className=" col s12 table striped">
       <caption>Trades</caption>
       <tbody>
         <tr align="center">

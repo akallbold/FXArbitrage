@@ -40,7 +40,7 @@ class Inputs extends Component {
 
   render() {
     return (
-      <div className="input-form">
+      <div className="input-form col s6">
         <h3>Inputs</h3>
         <form >
           <label>{`What is your maximum investment?`}<br></br>{`(whole ${this.props.baseCurrencySymbol} only)`}
@@ -75,7 +75,7 @@ class Inputs extends Component {
           </label>
           <br></br>
           <br></br>
-          <button onClick = {this.handleClick}>
+          <button className= "btn" onClick = {this.handleClick}>
             {this.props.trade ? "Stop Trading" :  "Start Trading"}
           </button>
         </form>
@@ -84,11 +84,11 @@ class Inputs extends Component {
         <h5>{`Total Trades: ${this.calculateTotalProfits().trades}`}</h5>
         <h5>{`Total Profits: $${this.calculateTotalProfits().totalProfits}`}</h5>
 
-        <button onClick = {this.handleClearClick}>
+        <button className= "btn" onClick = {this.handleClearClick}>
           Clear Previous Trades
         </button>
         <br></br>
-        <button onClick = {this.handleRefreshClick}>
+        <button className= "btn"  onClick = {this.handleRefreshClick}>
           Refresh Rates
         </button>
       </div>

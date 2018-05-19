@@ -174,7 +174,7 @@ class MainContainer extends Component {
 
   render() {
     return (
-      <div className="main-container">
+      <div className="main-container container">
         <h2>Foreign Exchange Arbitrage Simulation</h2>
         <div className= "top-row">
           <Inputs startTrades = {this.startTrades}

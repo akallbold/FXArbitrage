@@ -6,7 +6,7 @@ class CurrencyRates extends Component {
 
   render() {
     return (
-      <table className="currency-table">
+      <table className="currency-table col s6">
         <caption>Real Time Exchange Rates </caption>
         <tbody>
           <tr align="center">
