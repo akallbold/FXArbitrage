@@ -53,30 +53,42 @@ class Inputs extends Component {
           <br></br>
           <label>What is your base currency?</label>
           <br></br>
-          <label>
-            <input type="radio" value="USD" name="currency" defaultChecked= {this.props.baseCurrency === "USD"} onChange={this.handleRadioButton} />
-            USD
-          </label>
-          <label>
-            <input type="radio" value="EUR" name="currency" defaultChecked= {this.props.baseCurrency === "EUR"} onChange={this.handleRadioButton} />
-            EUR
-          </label>
-          <label>
-            <input type="radio" value="AUD" name="currency" defaultChecked= {this.props.baseCurrency === "AUD"} onChange={this.handleRadioButton} />
-            AUD
-          </label>
-          <label>
-            <input type="radio" value="JPY" name="currency" defaultChecked= {this.props.baseCurrency === "JPY"} onChange={this.handleRadioButton} />
-            JPY
-          </label>
-          <label>
-            <input type="radio" value="GBP" name="currency" defaultChecked= {this.props.baseCurrency === "GBP"} onChange={this.handleRadioButton} />
-            GBP
-          </label>
+          <form>
+            <p>
+  <label>
+    <input type="radio" value="USD" name="currency" checked= {this.props.baseCurrency === "USD"} onChange={this.handleRadioButton}/>
+    <span>USD</span>
+  </label>
+</p>
+<p>
+  <label>
+    <input type="radio" value="EUR" name="currency" checked= {this.props.baseCurrency === "EUR"} onChange={this.handleRadioButton}/>
+    <span>EUR</span>
+  </label>
+</p>
+<p>
+  <label>
+    <input type="radio" value="AUD" name="currency" checked= {this.props.baseCurrency === "AUD"} onChange={this.handleRadioButton}/>
+    <span>AUD</span>
+  </label>
+</p>
+<p>
+  <label>
+    <input type="radio" value="GBP" name="currency" checked= {this.props.baseCurrency === "GBP"} onChange={this.handleRadioButton}/>
+    <span>GBP</span>
+  </label>
+</p>
+<p>
+  <label>
+    <input type="radio" value="JPY" name="currency" checked= {this.props.baseCurrency === "JPY"} onChange={this.handleRadioButton}/>
+    <span>JPY</span>
+  </label>
+</p>
+        </form>
           <br></br>
           <br></br>
-          <button className= "btn" onClick = {this.handleClick}>
-            {this.props.trade ? "Stop Trading" :  "Start Trading"}
+          <button className= "btn waves-effect" onClick = {this.handleClick}>
+            {this.props.trade ? "Stop" :  "Start"}
           </button>
         </form>
 
@@ -85,11 +97,11 @@ class Inputs extends Component {
         <h5>{`Total Profits: $${this.calculateTotalProfits().totalProfits}`}</h5>
 
         <button className= "btn" onClick = {this.handleClearClick}>
-          Clear Previous Trades
+          Clear
         </button>
         <br></br>
         <button className= "btn"  onClick = {this.handleRefreshClick}>
-          Refresh Rates
+          Refresh
         </button>
       </div>
     );
