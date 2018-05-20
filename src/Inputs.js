@@ -40,8 +40,7 @@ class Inputs extends Component {
 
   render() {
     return (
-      <div className="input-form col s6 ">
-        <h6>Inputs</h6>
+      <div className="space-right col s6 ">
         <form>
           <label className="blackfont"> {`What is your maximum investment (in ${this.props.baseCurrencySymbol}) ?`}
           <input type= "text"

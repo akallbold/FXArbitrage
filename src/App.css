@@ -5,13 +5,13 @@
 }
 
 .App{
-    background-image: url("NYC.jpg");
+    /* background-image: url("NYC.jpg"); */
     display: flex;
     justify-content: center
 }
 
 .main-container{
-  background-image: url("NYC.jpg");
+  /* background-image: url("NYC.jpg"); */
   display: flex;
   flex-direction: column;
   font-family: 'Lato', sans-serif;
@@ -76,6 +76,12 @@ th, td {
 .space{
   margin: 5px;
 }
+.space-right{
+  margin: 5px 40px 20px 5px;
+}
+/* .space-left{
+  margin: 5px 5px 5px 40px;
+} */
 
 .blackfont{
 color: black;

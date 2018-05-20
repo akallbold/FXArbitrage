@@ -38,9 +38,9 @@ createTradeElements = () => {
 
   render() {
     return (
-    <table className="col s12 table striped responsive-table">
-      <caption>Trades</caption>
-      <tbody>
+    <table className="col s12 table striped">
+      {/* <caption>Trades</caption> */}
+      <thead>
         <tr align="center">
           {/* <th>Best Trade</th> */}
           <th>Date</th>
@@ -52,7 +52,7 @@ createTradeElements = () => {
           <th>Trade Four</th>
           <th>Profit</th>
         </tr>
-      </tbody>
+      </thead>
       {this.createTradeElements()}
     </table>
   )}
