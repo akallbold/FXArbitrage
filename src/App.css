@@ -10,14 +10,15 @@
     justify-content: center
 }
 
-/* .main-container{
+.main-container{
+  background-image: url("NYC.jpg");
   display: flex;
   flex-direction: column;
   font-family: 'Lato', sans-serif;
   color: rgb(56,56,56);
   height:100%;
   width:95%;
-} */
+}
 
 h2 {
   text-align: center
@@ -36,6 +37,7 @@ h2 {
   width: 35%;
   border: 4px solid black;
   padding: 10px 10px 10px 10px;
+  text-align: center;
 }
 
 .currency-table{
@@ -69,4 +71,12 @@ table {
 
 th, td {
   padding: 10px;
+}
+
+.space{
+  margin: 5px;
+}
+
+.blackfont{
+color: black;
 }

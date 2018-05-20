@@ -174,33 +174,35 @@ class MainContainer extends Component {
 
   render() {
     return (
-      <div className="main-container container">
+      <div className="main-container">
         <h2>Foreign Exchange Arbitrage Simulation</h2>
-        <div className= "top-row">
-          <Inputs startTrades = {this.startTrades}
-                  maxInvestment = {this.state.maxInvestment}
-                  updateMaxInvestment = {this.updateMaxInvestment}
-                  trade = {this.state.trade}
-                  updateTrade = {this.updateTrade}
-                  successfulTrades = {this.state.successfulTrades}
-                  changeBaseCurrency = {this.changeBaseCurrency}
-                  baseCurrency = {this.state.baseCurrency}
-                  clearPreviousTrades = {this.clearPreviousTrades}
-                  baseCurrencySymbol = {this.state.baseCurrencySymbol}
-                  refreshRates = {this.refreshRates}
-          />
-          <CurrencyRates USD= {this.state.USD}
-                         EUR= {this.state.EUR}
-                         GBP= {this.state.GBP}
-                         AUD= {this.state.AUD}
-                         JPY= {this.state.JPY}
-          />
+        <div className= "container">
+          <div className= "top-row">
+            <Inputs startTrades = {this.startTrades}
+                    maxInvestment = {this.state.maxInvestment}
+                    updateMaxInvestment = {this.updateMaxInvestment}
+                    trade = {this.state.trade}
+                    updateTrade = {this.updateTrade}
+                    successfulTrades = {this.state.successfulTrades}
+                    changeBaseCurrency = {this.changeBaseCurrency}
+                    baseCurrency = {this.state.baseCurrency}
+                    clearPreviousTrades = {this.clearPreviousTrades}
+                    baseCurrencySymbol = {this.state.baseCurrencySymbol}
+                    refreshRates = {this.refreshRates}
+            />
+            <CurrencyRates USD= {this.state.USD}
+                           EUR= {this.state.EUR}
+                           GBP= {this.state.GBP}
+                           AUD= {this.state.AUD}
+                           JPY= {this.state.JPY}
+            />
 
-        </div>
-        <div className = "bottom-row">
-          <TradeTable successfulTrades= {this.state.successfulTrades}
-                      baseCurrencySymbol = {this.state.baseCurrencySymbol}
-          />
+          </div>
+          <div className = "bottom-row">
+            <TradeTable successfulTrades= {this.state.successfulTrades}
+                        baseCurrencySymbol = {this.state.baseCurrencySymbol}
+            />
+          </div>
         </div>
       </div>
     );
