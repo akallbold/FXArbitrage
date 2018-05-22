@@ -25,7 +25,6 @@ class Inputs extends Component {
   }
 
    handleRadioButton = (event) => {
-    event.preventDefault()
     this.props.changeBaseCurrency(event.target.value)
   }
 
