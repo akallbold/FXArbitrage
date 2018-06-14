@@ -6,35 +6,45 @@ import API_KEY from './config.js';
 
 // Anna, I put this here because now it is reachable by tests
 export const createTradePermutations = (nonBaseCurrencies) => {
-  let fourArrays = permute(nonBaseCurrencies)
+
+  let fourArrays = permute(nonBaseCurrencies, 4)
   let threeArrays = fourArrays.map(array => {
     return array.slice(0,3)
   })
-  let twoArrays = threeArrays.map(array => {
-    return array.slice(0,2)
-  })
-  let allArrays = [...fourArrays, ...threeArrays, ...twoArrays]
+  let twoArrayoutput = []
+    for (let i = 0; i < nonBaseCurrencies.length; i++){
+      for (let j = 0; j < nonBaseCurrencies.length; j++){
+        if (i !== j){
+          twoArrayoutput.push([nonBaseCurrencies[i], nonBaseCurrencies[j]])
+        }
+      }
+    }
+  let allArrays = [...fourArrays, ...threeArrays, ...twoArrayoutput]
   return allArrays
 }
 
-function permute(permutation) {
-  var length = permutation.length,
-      result = [permutation.slice()],
-      c = new Array(length).fill(0),
-      i = 1, k, p;
+function permute(permutation, length) {
+  var result = [permutation.slice()],
+      currentArray = new Array(length).fill(0),
+      index = 1,
+      k,
+      temp;
 
-  while (i < length) {
-    if (c[i] < i) {
-      k = i % 2 && c[i];
-      p = permutation[i];
-      permutation[i] = permutation[k];
-      permutation[k] = p;
-      ++c[i];
-      i = 1;
+  while (index < length) {
+    if (currentArray[index] < index) {
+      console.log("permutation", permutation)
+
+      k = index % 2 && currentArray[index];
+      console.log("k", k)
+      temp = permutation[index];
+      permutation[index] = permutation[k];
+      permutation[k] = temp;
+      ++currentArray[index];
+      index = 1;
       result.push(permutation.slice());
     } else {
-      c[i] = 0;
-      ++i;
+      currentArray[index] = 0;
+      ++index;
     }
   }
   return result;
@@ -65,6 +75,7 @@ class MainContainer extends Component {
   componentDidMount = () => {
     setInterval(this.getRates(this.state.allCurrencies), 60000);
     this.setState({tradePermutations: createTradePermutations(this.state.nonBaseCurrencies)})
+    // this.setState({tradePermutations: createTradePermutations(["1","2",'3','4'])})
   }
 
   componentWillReceiveProps = () => {
@@ -73,7 +84,7 @@ class MainContainer extends Component {
 
   getRates = (currencyArray) => {
     currencyArray.forEach(currency => {
-      console.log("in getrates")
+      // console.log("in getrates")
       this.fetchRates(currency)
     })
   }
@@ -83,7 +94,7 @@ class MainContainer extends Component {
   }
 
   fetchRates = (currency) => {
-    console.log("in fetchrates")
+    // console.log("in fetchrates")
     fetch(`https://data.fixer.io/api/latest?access_key=${API_KEY}&base=${currency}&symbols=USD,AUD,EUR,JPY,GBP`)
     .then(response => response.json())
     .then(data => {
