@@ -7,6 +7,7 @@ formatNumber = (num) => {
   }
 
 createTradeElements = () => {
+
   if (this.props.successfulTrades.length === 0) {
     let output = []
     let table = []
@@ -20,15 +21,24 @@ createTradeElements = () => {
     output.push(<tbody key = "">{table}</tbody>)
     return output
   } else {
+    let bestTrade = 0
+    let bestTradeLocation = 0
+    this.props.successfulTrades.map((trade, i) => {
+      if (trade.profits > bestTrade) {
+        bestTrade = trade.profits
+        bestTradeLocation = i
+      }
+    })
     return this.props.successfulTrades.map((trade, i) => {
-      let originalInvestment = this.formatNumber(trade.originalInvestment)
+      let originalInvestmentFormatted = this.formatNumber(trade.originalInvestment)
+
       return (
-        <tbody key= {i}>
-          <tr align="center">
-            {/* <td>{trade.best ? "✓" : ""}</td> */}
+        <tbody key= {i} >
+          <tr align="center" className= {i === bestTradeLocation ? "red-border" : ""}>
+            {/* <td></td> */}
             <td>{trade.time.toLocaleDateString()}</td>
             <td>{trade.time.toLocaleTimeString()}</td>
-            <td>{`${trade.baseCurrencySymbol} ${originalInvestment}`}</td>
+            <td>{`${trade.baseCurrencySymbol} ${originalInvestmentFormatted}`}</td>
             <td>{trade.currencyPermutation[0]}</td>
             <td>{trade.currencyPermutation[1]}</td>
             <td>{trade.currencyPermutation[2] ? trade.currencyPermutation[2] : "None" }</td>
