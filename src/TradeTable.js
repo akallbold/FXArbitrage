@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 
 class TradeTable extends Component {
 
+formatNumber = (num) => {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
 createTradeElements = () => {
   if (this.props.successfulTrades.length === 0) {
     let output = []
@@ -17,13 +21,14 @@ createTradeElements = () => {
     return output
   } else {
     return this.props.successfulTrades.map((trade, i) => {
+      let originalInvestment = this.formatNumber(trade.originalInvestment)
       return (
         <tbody key= {i}>
           <tr align="center">
             {/* <td>{trade.best ? "✓" : ""}</td> */}
             <td>{trade.time.toLocaleDateString()}</td>
             <td>{trade.time.toLocaleTimeString()}</td>
-            <td>{`${trade.baseCurrencySymbol} ${trade.originalInvestment}`}</td>
+            <td>{`${trade.baseCurrencySymbol} ${originalInvestment}`}</td>
             <td>{trade.currencyPermutation[0]}</td>
             <td>{trade.currencyPermutation[1]}</td>
             <td>{trade.currencyPermutation[2] ? trade.currencyPermutation[2] : "None" }</td>

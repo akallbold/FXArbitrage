@@ -14,6 +14,7 @@ class Inputs extends Component {
 
   handleChange = (event) => {
     this.props.updateMaxInvestment(event.target.value)
+
     if (this.props.trade){
       this.props.updateTrade()
     }

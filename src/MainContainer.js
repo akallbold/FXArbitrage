@@ -4,7 +4,7 @@ import Inputs from './Inputs'
 import TradeTable from './TradeTable'
 import API_KEY from './config.js';
 
-// Anna, I put this here because now it is reachable by tests
+
 export const createTradePermutations = (nonBaseCurrencies) => {
 
   let fourArrays = permute(nonBaseCurrencies, 4)
@@ -32,10 +32,7 @@ function permute(permutation, length) {
 
   while (index < length) {
     if (currentArray[index] < index) {
-      console.log("permutation", permutation)
-
       k = index % 2 && currentArray[index];
-      console.log("k", k)
       temp = permutation[index];
       permutation[index] = permutation[k];
       permutation[k] = temp;
@@ -59,7 +56,7 @@ class MainContainer extends Component {
     currentCurrency: "USD",
     currentExchange:1,
     currentMoney: 0,
-    maxInvestment: 1000,
+    maxInvestment: 1000000,
     nonBaseCurrencies:["EUR", "GBP", "JPY", "AUD"],
     successfulTrades:[],
     timeOfLastFetch: "",
@@ -75,16 +72,15 @@ class MainContainer extends Component {
   componentDidMount = () => {
     setInterval(this.getRates(this.state.allCurrencies), 60000);
     this.setState({tradePermutations: createTradePermutations(this.state.nonBaseCurrencies)})
-    // this.setState({tradePermutations: createTradePermutations(["1","2",'3','4'])})
   }
 
   componentWillReceiveProps = () => {
     this.startTrades()
   }
 
+
   getRates = (currencyArray) => {
     currencyArray.forEach(currency => {
-      // console.log("in getrates")
       this.fetchRates(currency)
     })
   }
@@ -94,7 +90,6 @@ class MainContainer extends Component {
   }
 
   fetchRates = (currency) => {
-    // console.log("in fetchrates")
     fetch(`https://data.fixer.io/api/latest?access_key=${API_KEY}&base=${currency}&symbols=USD,AUD,EUR,JPY,GBP`)
     .then(response => response.json())
     .then(data => {
@@ -104,7 +99,10 @@ class MainContainer extends Component {
 
   updateMaxInvestment = (input) => {
     let onlyNumbers = input.replace(/\D/g, '');
-    this.setState({maxInvestment:onlyNumbers})
+    let numberWithCommas = (num) => {
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    this.setState({maxInvestment:numberWithCommas(onlyNumbers)})
   }
 
   updateTrade = () => {
